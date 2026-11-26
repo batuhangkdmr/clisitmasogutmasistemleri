@@ -1,6 +1,3 @@
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
-import { cwd } from "node:process";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,6 +5,8 @@ import Breadcrumb from "../components/Breadcrumb";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import { featuredProjects, projectImage } from "../lib/home-projects";
+import { mediaUrl } from "../lib/cloudinary-loader";
+import { mediaFiles } from "../lib/media-files";
 import { pageMetadata } from "../lib/seo";
 import { site } from "../lib/site";
 
@@ -40,24 +39,6 @@ const pages = {
         "Isının oda oda dengelenmesi",
         "Basınç ve sızıntı kontrolü",
         "İş bitince kısa kullanım notları",
-      ],
-    },
-  },
-  kurumsal: {
-    eyebrow: "HAKKIMIZDA",
-    title: "CL Isıtma Sistemleri & Tesisat",
-    seoTitle: "Hakkımızda – Samsun Tekkeköy",
-    lead: "Tekkeköy / Samsun’da klima, doğalgaz ve tesisat işleri. Sahada büyümüş bir ekibiz; adresimiz 19 Mayıs Mahallesi, 667. Sokak 5/2 B.",
-    story: {
-      title: "İşin başında biz varız",
-      paragraphs: [
-        "Keşiften montaja kadar aynı ekiple ilerliyoruz. Ne yapılacağını ve tutarını baştan konuşuyoruz.",
-        "Ev ve iş yerleri için marka alternatifleri çıkarıyoruz. Peşin fiyatına taksit imkânı da var.",
-      ],
-      stats: [
-        ["20+", "Yıl tecrübe"],
-        [String(site.phones.length), "Telefon hattı"],
-        ["Tekkeköy", "İşletme adresi"],
       ],
     },
   },
@@ -107,46 +88,65 @@ const pages = {
       },
       {
         title: "7. Haklarınız",
-        body: "KVKK haklarınız için aydınlatma metnine bakın. Başvuru için telefon hatlarımızı kullanın.",
+        body: "KVKK kapsamındaki haklarınızı ve yazılı başvuru yöntemini KVKK Aydınlatma Metni’nde bulabilirsiniz.",
       },
     ],
   },
   "kvkk-aydinlatma-metni": {
     eyebrow: "YASAL",
     title: "KVKK Aydınlatma Metni",
-    lead: "6698 sayılı Kanun kapsamında kişisel verileriniz hakkında bilgilendirme.",
+    lead: "Fiyat, ürün, ücretsiz keşif ve hizmet taleplerinizde kişisel verilerinizi nasıl kullandığımızı ve KVKK kapsamındaki haklarınızı öğrenin.",
+    description: "Samsun Tekkeköy’de CL Isıtma’ya ilettiğiniz teklif, keşif ve hizmet taleplerinde işlenen kişisel veriler, işleme nedenleri ve KVKK başvuru yolu.",
     sections: [
       {
         title: "1. Veri sorumlusu",
-        body: `${site.name}, ${site.address.full}. İletişim: ${site.phones.map((p) => p.display).join(" / ")}.`,
+        body: `Veri sorumlusu ${site.name}’dır. Adresimiz ${site.address.full}. İşletmeyle iletişim için ${site.email} adresine yazabilir veya ${site.phones[0].display} numarasını arayabilirsiniz.`,
       },
       {
-        title: "2. İşlenen veriler",
-        body: "Ad soyad, telefon, hizmet seçimi ve varsa seçilen ürün, e-posta ve mesaj.",
+        title: "2. Hangi verileri nasıl topluyoruz?",
+        items: [
+          "İletişim formundan adınızı, soyadınızı, telefon numaranızı ve seçtiğiniz hizmeti alırız. Paylaştığınız takdirde e-posta adresinizi, mesajınızı ve ilgilendiğiniz ürünü de alırız.",
+          "Telefon, e-posta veya WhatsApp üzerinden bize ulaştığınızda iletişim bilgilerinizi ve talebiniz için paylaştığınız bilgileri alırız. Yerinde keşif isterseniz planlama için keşif adresinizi isteyebiliriz.",
+          "Site ve görseller yüklenirken IP adresi ve istek bilgileri, sunucular ve görsel dağıtım altyapısı tarafından elektronik ortamda işlenebilir.",
+        ],
       },
       {
-        title: "3. Amaç",
-        body: "Teklif, keşif, müşteri iletişimi ve yasal yükümlülükler.",
+        title: "3. İşleme amaçları ve hukuki sebepler",
+        items: [
+          "Kombi ve klima gibi ürünler için fiyat ve stok taleplerini yanıtlamak, teklif hazırlamak, yerinde keşif, montaj veya petek temizliği planlamak için talebinizle doğrudan ilgili verileri işleriz. Dayanak, sözleşmenin kurulması veya ifasıyla doğrudan ilgili ve gerekli olmasıdır (KVKK m. 5/2-c).",
+          "Genel soruları yanıtlamak ve sitenin güvenli çalışmasını sağlamak için gerekli verileri, temel hak ve özgürlüklerinize zarar vermemek kaydıyla meşru menfaatimiz kapsamında işleriz (KVKK m. 5/2-f).",
+          "Yetkili makamların mevzuata dayanan taleplerini karşılamak için gerekli verileri hukuki yükümlülüğümüz kapsamında işleriz (KVKK m. 5/2-ç).",
+        ],
       },
       {
-        title: "4. Hukuki sebep",
-        body: "Sözleşmenin kurulması/ifası, meşru menfaat ve formdaki açık onayınız.",
+        title: "4. Veriler kimlere ve hangi amaçla aktarılır?",
+        items: [
+          "Formda paylaştığınız bilgiler, talebinizi işletme posta kutusuna iletmek için Resend e-posta altyapısından geçer. E-posta adresi girerseniz size yanıt verebilmemiz için bu adres iletide yanıt adresi olarak kullanılır.",
+          "Barındırma sağlayıcısı siteyi sunmak, Cloudinary ise görselleri iletmek için bağlantı ve istek bilgilerini işleyebilir. WhatsApp üzerinden yazmayı seçerseniz mesajınız ve iletişim bilgileriniz WhatsApp altyapısı üzerinden iletilir.",
+          "Kanuni yükümlülüğümüz doğduğunda ilgili bilgiler yetkili kamu kurumları ve adli makamlarla talep kapsamıyla sınırlı olarak paylaşılabilir.",
+          "Bu sağlayıcıların altyapısına bağlı olarak veriler yurt dışında işlenebilir. Yurt dışına aktarımlarda KVKK’nın 9. maddesindeki aktarım şartları uygulanır.",
+        ],
       },
       {
-        title: "5. Aktarım",
-        body: "Form bilgileriniz talebinizi e-posta ile iletmek için Resend altyapısı üzerinden işlenir. WhatsApp üzerinden doğrudan yazarsanız ilgili mesaj o hizmet üzerinden iletilir.",
+        title: "5. KVKK kapsamındaki haklarınız",
+        body: "Kanun’un 11. maddesi uyarınca aşağıdaki haklarınızı kullanabilirsiniz.",
+        items: [
+          "Kişisel verilerinizin işlenip işlenmediğini öğrenmek ve işlenmişse bilgi istemek.",
+          "İşleme amacını ve verilerin bu amaca uygun kullanılıp kullanılmadığını öğrenmek.",
+          "Verilerin aktarıldığı yurt içindeki veya yurt dışındaki üçüncü kişileri bilmek.",
+          "Eksik veya yanlış verilerin düzeltilmesini, Kanun’un 7. maddesindeki şartlar oluştuğunda verilerin silinmesini veya yok edilmesini istemek.",
+          "Düzeltme, silme veya yok etme işlemlerinin verilerin aktarıldığı üçüncü kişilere bildirilmesini istemek.",
+          "Verilerin yalnızca otomatik sistemlerle analiz edilmesi sonucu aleyhinize bir sonuç çıkmasına itiraz etmek.",
+          "Kanuna aykırı işleme nedeniyle zarara uğrarsanız zararın giderilmesini talep etmek.",
+        ],
       },
       {
-        title: "6. Toplama",
-        body: "Web formu, telefon ve WhatsApp üzerinden elektronik ortamda.",
-      },
-      {
-        title: "7. Haklarınız (KVKK m.11)",
-        body: "İşlenip işlenmediğini öğrenme, bilgi isteme, düzeltme, silme, aktarılan üçüncü kişileri bilme, otomatik analiz sonucuna itiraz ve zararın giderilmesini talep etme haklarınız vardır.",
-      },
-      {
-        title: "8. Başvuru",
-        body: `Başvurularınızı ${site.phones.map((p) => p.display).join(" veya ")} numaralarından iletebilirsiniz.`,
+        title: "6. KVKK başvurusu nasıl yapılır?",
+        body: `İmzalı yazılı başvurunuzu ${site.address.full} adresine iletebilirsiniz. Başvurunuzu niteliğine göre en kısa sürede ve en geç 30 gün içinde sonuçlandırırız.`,
+        items: [
+          "Adınızı, soyadınızı, imzanızı, T.C. kimlik numaranızı ve tebligata esas ikametgâh veya iş yeri adresinizi belirtin. Yabancı uyrukluysanız uyruğunuzu ve pasaport numaranızı ya da varsa kimlik numaranızı belirtin.",
+          "Talebinizin konusunu ve varsa bildirime esas e-posta adresinizi, telefon ve faks numaranızı yazın. Talebinizle ilgili bilgi ve belgeleri varsa ekleyin.",
+        ],
       },
     ],
   },
@@ -228,7 +228,7 @@ export default async function Page({ params }) {
   const page = pages[slug];
 
   const galleryFiles = page.gallery
-    ? (await readdir(join(cwd(), "public", "galeri"))).filter((file) => /\.(jpe?g|png|webp)$/i.test(file)).sort()
+    ? (await mediaFiles("galeri")).filter((file) => file !== "firmayeri.jpg" && /\.(jpe?g|png|webp)$/i.test(file))
     : [];
   const featuredFiles = new Set(featuredProjects.map(([file]) => file));
   const galleryPhotos = page.gallery
@@ -262,8 +262,8 @@ export default async function Page({ params }) {
               <div className="project-gallery">
                 {galleryPhotos.map(([file, title], index) => (
                   <figure key={file} id={`ornek-${index + 1}`}>
-                    <a href={projectImage(file)} aria-label={`${title} fotoğrafını aç (${index + 1})`}>
-                      <Image src={projectImage(file)} alt={title} fill sizes="(max-width: 700px) 46vw, 275px" />
+                    <a href={mediaUrl(projectImage(file), { width: 1800 })} aria-label={`${title} fotoğrafını aç (${index + 1})`}>
+                      <Image src={projectImage(file)} alt={title} fill sizes="(max-width: 700px) 46vw, (max-width: 1200px) 23vw, 275px" />
                     </a>
                     <figcaption>{title}</figcaption>
                   </figure>
@@ -277,26 +277,6 @@ export default async function Page({ params }) {
                 ’a bakabilirsiniz.
               </p>
             </>
-          ) : null}
-
-          {page.story ? (
-            <div className="company-story">
-              <div>
-                <h2>{page.story.title}</h2>
-                {page.story.paragraphs.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
-                <p className="story-address">{site.address.full}</p>
-              </div>
-              <div className="numbers">
-                {page.story.stats.map(([value, label]) => (
-                  <div key={label}>
-                    <b>{value}</b>
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           ) : null}
 
           {page.checklist ? (
@@ -314,7 +294,12 @@ export default async function Page({ params }) {
             ? page.sections.map((section) => (
                 <section className="legal-block" key={section.title}>
                   <h2>{section.title}</h2>
-                  <p>{section.body}</p>
+                    {section.body && <p>{section.body}</p>}
+                    {section.items && (
+                      <ul>
+                        {section.items.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    )}
                 </section>
               ))
             : null}

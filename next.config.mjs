@@ -3,6 +3,9 @@ const nextConfig = {
     root: process.cwd(),
   },
   images: {
+    ...(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      ? { loader: "custom", loaderFile: "./app/lib/cloudinary-loader.js" }
+      : {}),
     remotePatterns: [
       { protocol: "https", hostname: "st-daikin.mncdn.com" },
       { protocol: "https", hostname: "klima.mitsubishielectric.com.tr" },

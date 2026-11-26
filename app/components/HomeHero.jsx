@@ -20,6 +20,7 @@ const { props: { srcSet: desktopBoilerSrcSet } } = getImageProps({
 
 export default function HomeHero() {
   const [{ index, direction }, setSlide] = useState({ index: 0, direction: 0 });
+  const [firstImageReady, setFirstImageReady] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -48,6 +49,7 @@ export default function HomeHero() {
     <section className="home-hero" id="ana-sayfa" aria-labelledby="home-hero-title">
       <div className="home-hero-visual">
         {slides.map(([id, , , alt, objectPosition], position) => {
+          if (!firstImageReady && position !== 0 && position !== index) return null;
           const imageProps = {
             src: `/assets/hero-${id}.webp`,
             alt: position === index ? alt : "",
@@ -68,7 +70,11 @@ export default function HomeHero() {
               </picture>
             );
           }
-          return <Image key={id} {...imageProps} />;
+          return (
+            <Image key={id} {...imageProps}
+              onLoad={position === 0 ? () => setFirstImageReady(true) : undefined}
+              onError={position === 0 ? () => setFirstImageReady(true) : undefined} />
+          );
         })}
       </div>
       <div className="container home-hero-inner">

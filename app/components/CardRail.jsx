@@ -28,7 +28,7 @@ export default function CardRail({ id, title, intro, children, action }) {
 
   return (
     <section id={id} className={`home-section home-rail-section home-${id}`} aria-labelledby={`${id}-title`}>
-      <div className="container">
+      <div className="container" data-home-reveal="pending">
         <div className="home-section-head">
           <div>
             <h2 id={`${id}-title`}>{title}</h2>

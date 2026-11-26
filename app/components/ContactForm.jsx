@@ -111,9 +111,8 @@ export default function ContactForm() {
       <label className="consent">
         <input type="checkbox" name="consent" required />
         <span>
-          <Link href="/gizlilik-politikasi">Gizlilik</Link> ve{" "}
-          <Link href="/kvkk-aydinlatma-metni">KVKK</Link> metinlerini okudum; iletişim için bilgilerimin
-          kullanılmasını kabul ediyorum.
+          <Link href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</Link> ve{" "}
+          <Link href="/gizlilik-politikasi">Gizlilik Politikası</Link> hakkında bilgilendirildim.
         </span>
       </label>
       {error && <p className="home-form-error" role="alert">{error}</p>}

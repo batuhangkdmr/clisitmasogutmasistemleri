@@ -1,0 +1,1227 @@
+{
+  "/assets/carouselfoto1.png": {
+    "id": "cl-isitma/site/carouselfoto1-94d5befcc9db7aea",
+    "version": 1795734689,
+    "width": 1536,
+    "digest": "94d5befcc9db7aeae4f35de347e44bc2c4bb36162388e1666d014297b9479dc7",
+    "account": "jppwd0ec"
+  },
+  "/assets/cl-hero.webp": {
+    "id": "cl-isitma/site/cl-hero-2731e52f94bf6432",
+    "version": 1795734685,
+    "width": 1672,
+    "digest": "2731e52f94bf643268d614a29d72b3179e4db6689267319fbf73e1d09906231b",
+    "account": "jppwd0ec"
+  },
+  "/assets/cl-logo-transparent.png": {
+    "id": "cl-isitma/site/cl-logo-transparent-9dc1aac7ba3afbad",
+    "version": 1795734686,
+    "width": 1302,
+    "digest": "9dc1aac7ba3afbad81a94422e32b328949ebe19ee19302daf6d2f2691c12f7a5",
+    "account": "jppwd0ec"
+  },
+  "/assets/cl-logo.png": {
+    "id": "cl-isitma/site/cl-logo-10a48040c56a65ad",
+    "version": 1795734686,
+    "width": 880,
+    "digest": "10a48040c56a65ad8bea9c44619ff25f65cee41d85689a6fcbad9de0eec2f169",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-gunes-enerjisi-hd.webp": {
+    "id": "cl-isitma/site/hero-gunes-enerjisi-hd-79b7e6cff15a5902",
+    "version": 1795734686,
+    "width": 1280,
+    "digest": "79b7e6cff15a5902536d23d672f07ba7fb39a5168a0511cc38be14ee0313b0bd",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-gunes-enerjisi.webp": {
+    "id": "cl-isitma/site/hero-gunes-enerjisi-1c30955799d18b07",
+    "version": 1795734686,
+    "width": 900,
+    "digest": "1c30955799d18b072b84675b5a6c6aaee4a53b6765fce8472a69560811a7e64f",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-isi-pompasi-hd.webp": {
+    "id": "cl-isitma/site/hero-isi-pompasi-hd-ef1aa8fa034bdb64",
+    "version": 1795734687,
+    "width": 1856,
+    "digest": "ef1aa8fa034bdb644d7bd4e24b16a7cdb3d01b7622cf5307a036d53e82f3f781",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-isi-pompasi.webp": {
+    "id": "cl-isitma/site/hero-isi-pompasi-00a7224eb960d893",
+    "version": 1795734687,
+    "width": 463,
+    "digest": "00a7224eb960d8931ff5949360a96ee887d26cf42850e78cdd1b4200bc01977b",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-klima-hd.webp": {
+    "id": "cl-isitma/site/hero-klima-hd-f5d51bb978bebce7",
+    "version": 1795734687,
+    "width": 1920,
+    "digest": "f5d51bb978bebce707adb407cc4eca185cb45e35735f00d6bed4ac8f6f6a3bac",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-klima.webp": {
+    "id": "cl-isitma/site/hero-klima-c0f5569ca30c8c43",
+    "version": 1795734687,
+    "width": 800,
+    "digest": "c0f5569ca30c8c43b5d70284a77ee1641afa3d4a81da86025c0a60eb13170785",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-kombi-desktop.webp": {
+    "id": "cl-isitma/site/hero-kombi-desktop-e022ad7eedf05390",
+    "version": 1795734688,
+    "width": 1800,
+    "digest": "e022ad7eedf053901b18d22c55f10c0fee8814aeae7d95dbf4e7924582b25470",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-kombi.webp": {
+    "id": "cl-isitma/site/hero-kombi-b261c348a789c90b",
+    "version": 1795734688,
+    "width": 800,
+    "digest": "b261c348a789c90b568a53aa9b10b1edcd980d2ef98ad4f289c466ed130a8547",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-yerden-isitma-hd.webp": {
+    "id": "cl-isitma/site/hero-yerden-isitma-hd-ebb2153fef65522a",
+    "version": 1795734688,
+    "width": 1620,
+    "digest": "ebb2153fef65522ac57775cf0e156859933855ea1b904dc54d4e54833f01ec76",
+    "account": "jppwd0ec"
+  },
+  "/assets/hero-yerden-isitma.webp": {
+    "id": "cl-isitma/site/hero-yerden-isitma-b1aedf26fff8e678",
+    "version": 1795734688,
+    "width": 1200,
+    "digest": "b1aedf26fff8e6780f243df93bef28c65ed45a2cadf70aee72e8c89188df4bf9",
+    "account": "jppwd0ec"
+  },
+  "/assets/hizmet-klima-isi-pompasi.webp": {
+    "id": "cl-isitma/site/hizmet-klima-isi-pompasi-6dfa6eab4d1a33a7",
+    "version": 1795734688,
+    "width": 804,
+    "digest": "6dfa6eab4d1a33a7d59f3eb9acfe6baf61df2be3b19561286ce95ab5bc45baaf",
+    "account": "jppwd0ec"
+  },
+  "/assets/hizmet-petek-temizligi.webp": {
+    "id": "cl-isitma/site/hizmet-petek-temizligi-f5bdcfa561f5772d",
+    "version": 1795734689,
+    "width": 850,
+    "digest": "f5bdcfa561f5772daa215f7aad98022d4ab68bd54613f4fe39ce8d98ae6a7708",
+    "account": "jppwd0ec"
+  },
+  "/assets/hizmet-yangin-tesisati.webp": {
+    "id": "cl-isitma/site/hizmet-yangin-tesisati-ceea61a61a04b4c0",
+    "version": 1795734689,
+    "width": 488,
+    "digest": "ceea61a61a04b4c06454c68c64c52a64b94cb58ad9071d9af0f00f65962e8ac6",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombi-ornek.webp": {
+    "id": "cl-isitma/site/kombi-ornek-2bdfc2263c2c18a5",
+    "version": 1795734689,
+    "width": 621,
+    "digest": "2bdfc2263c2c18a53f4ad2008a8ad3aa0da44ade135a90a5e87e3f651d9332c5",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/baymak.webp": {
+    "id": "cl-isitma/site/baymak-8557c33b6408fa4c",
+    "version": 1795734689,
+    "width": 440,
+    "digest": "8557c33b6408fa4ca1140397264a508fa8c5bfdacf70b00c39f5bd96f44488ec",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/buderus.webp": {
+    "id": "cl-isitma/site/buderus-0abe227bf6bed293",
+    "version": 1795734689,
+    "width": 440,
+    "digest": "0abe227bf6bed2935058b8b500cca7f9b0ddeb8772f3fde1b5b74cc5706351d9",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/daikin.webp": {
+    "id": "cl-isitma/site/daikin-23be7e788f25f911",
+    "version": 1795734689,
+    "width": 440,
+    "digest": "23be7e788f25f9114f8801099d6a6184a1031065b8cc46330f3f10b20db96888",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/demirdokum.webp": {
+    "id": "cl-isitma/site/demirdokum-701122d292d4895b",
+    "version": 1795734690,
+    "width": 440,
+    "digest": "701122d292d4895b866cff3bb7d002d034fcb8f706f7a80eb1e07ce8b7015f03",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/eca.webp": {
+    "id": "cl-isitma/site/eca-ea34002510bbf36e",
+    "version": 1795734690,
+    "width": 440,
+    "digest": "ea34002510bbf36e99bec8eba5fda1464e4a40867be1d705d78d3997b06e4890",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/termodinamik.webp": {
+    "id": "cl-isitma/site/termodinamik-8bd1bca4861391d1",
+    "version": 1795734690,
+    "width": 440,
+    "digest": "8bd1bca4861391d1a063b6148fc41ed1e8f6e4d247176af333121f2e28bd3e53",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/vaillant.webp": {
+    "id": "cl-isitma/site/vaillant-b1ab04b7890dd3d4",
+    "version": 1795734690,
+    "width": 440,
+    "digest": "b1ab04b7890dd3d4b2a9e0ccbdebfc94cf15fade86daeded9504c3b125fd1bb0",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/viessmann.webp": {
+    "id": "cl-isitma/site/viessmann-20ccb6e8ce08c460",
+    "version": 1795734690,
+    "width": 360,
+    "digest": "20ccb6e8ce08c460ffc15a79888417a918312dbae594c9ccf9a60a32d346c6e5",
+    "account": "jppwd0ec"
+  },
+  "/assets/kombiler/warmhaus.webp": {
+    "id": "cl-isitma/site/warmhaus-ffc716470400d18c",
+    "version": 1795734690,
+    "width": 440,
+    "digest": "ffc716470400d18ca165a7dae539f2641da24b51e52cde800b8e9d0a95465893",
+    "account": "jppwd0ec"
+  },
+  "/assets/magaza.jpg": {
+    "id": "cl-isitma/site/magaza-d7f2e25a5e013ba4",
+    "version": 1795734690,
+    "width": 1376,
+    "digest": "d7f2e25a5e013ba4546c6d899ddd3b4742e21ccc3ad00a97ab37b88548c6a996",
+    "account": "jppwd0ec"
+  },
+  "/assets/teknik-servis.webp": {
+    "id": "cl-isitma/site/teknik-servis-845d6d2e5fc3c0fd",
+    "version": 1795734691,
+    "width": 1086,
+    "digest": "845d6d2e5fc3c0fdcac012c5ec1e5eb92d834c8ce363649791c0f6cfe69fca92",
+    "account": "jppwd0ec"
+  },
+  "/brands/airfel.png": {
+    "id": "cl-isitma/site/airfel-c96356bfa7f1abce",
+    "version": 1795734691,
+    "width": 342,
+    "digest": "c96356bfa7f1abcee88801c399a148990b324d1088ca517d089aec6c61a2e166",
+    "account": "jppwd0ec"
+  },
+  "/brands/alarko.png": {
+    "id": "cl-isitma/site/alarko-5f74c282aa734ab0",
+    "version": 1795734691,
+    "width": 800,
+    "digest": "5f74c282aa734ab0a648b826cc4561825771f53fc563313c1ca18a63d1a3ad04",
+    "account": "jppwd0ec"
+  },
+  "/brands/altus.png": {
+    "id": "cl-isitma/site/altus-11f7394c0e8faf90",
+    "version": 1795734691,
+    "width": 549,
+    "digest": "11f7394c0e8faf90a3d8426dea58c02dd7e1b751b78770e6c38e6296f4c92171",
+    "account": "jppwd0ec"
+  },
+  "/brands/arcelik.png": {
+    "id": "cl-isitma/site/arcelik-1e5361f3cca0ce7f",
+    "version": 1795734691,
+    "width": 261,
+    "digest": "1e5361f3cca0ce7f43b4facd579d8f7dc4053d3994eb651163cad13653b42998",
+    "account": "jppwd0ec"
+  },
+  "/brands/baymak.png": {
+    "id": "cl-isitma/site/baymak-fadb736fa7acd648",
+    "version": 1795734692,
+    "width": 800,
+    "digest": "fadb736fa7acd648288e26a4e0f1e9a71878d96eaff1adc80291c096aba886c7",
+    "account": "jppwd0ec"
+  },
+  "/brands/beko.png": {
+    "id": "cl-isitma/site/beko-558928e4736cd15f",
+    "version": 1795734692,
+    "width": 240,
+    "digest": "558928e4736cd15f2f57db0e82082eb5ac17f77566cd55681f8574292f16f999",
+    "account": "jppwd0ec"
+  },
+  "/brands/bosch.png": {
+    "id": "cl-isitma/site/bosch-d0baa8b5adde62a7",
+    "version": 1795734692,
+    "width": 500,
+    "digest": "d0baa8b5adde62a7ab32401506d8d1743fc3d51550480ae4293fde471ec44c3b",
+    "account": "jppwd0ec"
+  },
+  "/brands/carrier.png": {
+    "id": "cl-isitma/site/carrier-012723848f7bba43",
+    "version": 1795734692,
+    "width": 800,
+    "digest": "012723848f7bba43fa01a87e391faebbc3c6031f3b9fee0c8d0cd7992e11f222",
+    "account": "jppwd0ec"
+  },
+  "/brands/daikin.png": {
+    "id": "cl-isitma/site/daikin-eb81ee53c34187e6",
+    "version": 1795734692,
+    "width": 800,
+    "digest": "eb81ee53c34187e68cad1e40b8625ba45e1bba3e1b02bb8860a4c7a70c59becb",
+    "account": "jppwd0ec"
+  },
+  "/brands/demirdokum.png": {
+    "id": "cl-isitma/site/demirdokum-8142876118affbdf",
+    "version": 1795734692,
+    "width": 480,
+    "digest": "8142876118affbdf9bb3eb4fc5c1c47089960e1d5b516d7ef1acbf5f250944bf",
+    "account": "jppwd0ec"
+  },
+  "/brands/eca.png": {
+    "id": "cl-isitma/site/eca-c935e0e727f9bc07",
+    "version": 1795734692,
+    "width": 692,
+    "digest": "c935e0e727f9bc07e203663b322ea64b92102c75285e02601eae348f7bb5b3ba",
+    "account": "jppwd0ec"
+  },
+  "/brands/fujitsu.png": {
+    "id": "cl-isitma/site/fujitsu-e6282a241ddf5339",
+    "version": 1795734692,
+    "width": 800,
+    "digest": "e6282a241ddf5339328de1a5f7ac9e09a1a7b361a17be3aa78d710281753acd8",
+    "account": "jppwd0ec"
+  },
+  "/brands/general.png": {
+    "id": "cl-isitma/site/general-f06fab30b10b4a5b",
+    "version": 1795734693,
+    "width": 800,
+    "digest": "f06fab30b10b4a5b11940f3a4f7802ee09dad66b741bfb6c76f806ca734053d3",
+    "account": "jppwd0ec"
+  },
+  "/brands/gree.png": {
+    "id": "cl-isitma/site/gree-635c3d3b27c08b8e",
+    "version": 1795734693,
+    "width": 328,
+    "digest": "635c3d3b27c08b8ec1fa597889312915e4f4bb03381dfd2dd39fb625316ed4f2",
+    "account": "jppwd0ec"
+  },
+  "/brands/haier.png": {
+    "id": "cl-isitma/site/haier-cc159b639da833ca",
+    "version": 1795734693,
+    "width": 800,
+    "digest": "cc159b639da833caf792072a5c83e947ae1bc636014420da5c19d362b5ad7c13",
+    "account": "jppwd0ec"
+  },
+  "/brands/hisense.png": {
+    "id": "cl-isitma/site/hisense-19dffb2a0da7a612",
+    "version": 1795734693,
+    "width": 800,
+    "digest": "19dffb2a0da7a61246b300a9b614c1fdde2bba508fae3146a5ec40c5729814ca",
+    "account": "jppwd0ec"
+  },
+  "/brands/hitachi.png": {
+    "id": "cl-isitma/site/hitachi-a8cd1369c1e2455f",
+    "version": 1795734693,
+    "width": 800,
+    "digest": "a8cd1369c1e2455f93d3c8325b7f66c96b65292ffbcb46180cad247d7f74ac35",
+    "account": "jppwd0ec"
+  },
+  "/brands/kumtel.png": {
+    "id": "cl-isitma/site/kumtel-66ee89a486124643",
+    "version": 1795734694,
+    "width": 384,
+    "digest": "66ee89a4861246435efcc93626681167cdd68b5ba9418176922dfe48ad210f1a",
+    "account": "jppwd0ec"
+  },
+  "/brands/lg.png": {
+    "id": "cl-isitma/site/lg-0ef6cb7026b4fb5b",
+    "version": 1795734694,
+    "width": 800,
+    "digest": "0ef6cb7026b4fb5bed663208826026305281fd61c7643a96f210fd648759192b",
+    "account": "jppwd0ec"
+  },
+  "/brands/midea.png": {
+    "id": "cl-isitma/site/midea-d274063c114727c2",
+    "version": 1795734694,
+    "width": 800,
+    "digest": "d274063c114727c26ebb174193221cde3f71915aacd0c872857d39387be9efad",
+    "account": "jppwd0ec"
+  },
+  "/brands/mitsubishi-electric.png": {
+    "id": "cl-isitma/site/mitsubishi-electric-2cf815489a6f38cd",
+    "version": 1795734694,
+    "width": 800,
+    "digest": "2cf815489a6f38cd33294b409644477b00c138480b269bf3c950e1328ab139ac",
+    "account": "jppwd0ec"
+  },
+  "/brands/mitsubishi-heavy-industries.png": {
+    "id": "cl-isitma/site/mitsubishi-heavy-industries-23779e9437d5df9a",
+    "version": 1795734694,
+    "width": 800,
+    "digest": "23779e9437d5df9aca9258ba357ad215c5507487e6394452132b995963e28321",
+    "account": "jppwd0ec"
+  },
+  "/brands/panasonic.png": {
+    "id": "cl-isitma/site/panasonic-96ae9c59beefe58b",
+    "version": 1795734694,
+    "width": 800,
+    "digest": "96ae9c59beefe58bf25de31cb896eba923f98cc7630d101016d3894b8d0bb83f",
+    "account": "jppwd0ec"
+  },
+  "/brands/regal.png": {
+    "id": "cl-isitma/site/regal-02e9c3a5e760bba6",
+    "version": 1795734694,
+    "width": 250,
+    "digest": "02e9c3a5e760bba6383c386dd5029fdf38cd5edd4692aaaed1fe13544a39411d",
+    "account": "jppwd0ec"
+  },
+  "/brands/samsung.png": {
+    "id": "cl-isitma/site/samsung-aec5ffa399a5191f",
+    "version": 1795734695,
+    "width": 800,
+    "digest": "aec5ffa399a5191ff2a6925c4289742f45584c0fa9ad0565ae10d7cc8ceaeade",
+    "account": "jppwd0ec"
+  },
+  "/brands/siemens.png": {
+    "id": "cl-isitma/site/siemens-eac4542c225a7279",
+    "version": 1795734695,
+    "width": 800,
+    "digest": "eac4542c225a727912ffebb292bdf6590e6618ecdeab85318ed4aaabc2dc04e6",
+    "account": "jppwd0ec"
+  },
+  "/brands/sigma.png": {
+    "id": "cl-isitma/site/sigma-370af8578ca878df",
+    "version": 1795734695,
+    "width": 242,
+    "digest": "370af8578ca878df417112ff05f13fa9ff32989a5d0966115648b4951d55b0bc",
+    "account": "jppwd0ec"
+  },
+  "/brands/tcl.png": {
+    "id": "cl-isitma/site/tcl-f7da5bbd49fec0c8",
+    "version": 1795734695,
+    "width": 800,
+    "digest": "f7da5bbd49fec0c822914dc13edce3fbc2ef9c9541f5213789fafff771a3ba42",
+    "account": "jppwd0ec"
+  },
+  "/brands/toshiba.png": {
+    "id": "cl-isitma/site/toshiba-6236083491fe3b76",
+    "version": 1795734695,
+    "width": 800,
+    "digest": "6236083491fe3b762b878b0c41537df2739c98a463079d4ca9578c41382802f5",
+    "account": "jppwd0ec"
+  },
+  "/brands/vaillant.png": {
+    "id": "cl-isitma/site/vaillant-9fdd2e3f78dbab59",
+    "version": 1795734696,
+    "width": 800,
+    "digest": "9fdd2e3f78dbab598437b2c4d55c2624f4febb2cc369a54e5de834961ea01ce9",
+    "account": "jppwd0ec"
+  },
+  "/brands/vestel.png": {
+    "id": "cl-isitma/site/vestel-90bbbb3eddf8ac7a",
+    "version": 1795734696,
+    "width": 800,
+    "digest": "90bbbb3eddf8ac7a2364d0555e77169cbed30b99bb8ca66b958197696af81d27",
+    "account": "jppwd0ec"
+  },
+  "/brands/viessmann.png": {
+    "id": "cl-isitma/site/viessmann-06c5f0e83124755a",
+    "version": 1795734696,
+    "width": 800,
+    "digest": "06c5f0e83124755ae071cee3b9b80081c43ce22e41b65ba84d7909d2caec0aa5",
+    "account": "jppwd0ec"
+  },
+  "/brands/york.png": {
+    "id": "cl-isitma/site/york-d10b19c36d3d12f9",
+    "version": 1795734696,
+    "width": 320,
+    "digest": "d10b19c36d3d12f9eabd3e41f7a18cf94d446d815a1735b003bfe997569795c1",
+    "account": "jppwd0ec"
+  },
+  "/galeri/firmayeri.jpg": {
+    "id": "cl-isitma/site/firmayeri-d7f2e25a5e013ba4",
+    "version": 1795736056,
+    "width": 1376,
+    "digest": "d7f2e25a5e013ba4546c6d899ddd3b4742e21ccc3ad00a97ab37b88548c6a996",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.20.02.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-20-02-eb7fd94d768ed0bd",
+    "version": 1795734696,
+    "width": 1200,
+    "digest": "eb7fd94d768ed0bd6df6be888706297c829690f41285aa07f9be4a49d42135ea",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.56.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-56-21ff02d77a248fa6",
+    "version": 1795734697,
+    "width": 1125,
+    "digest": "21ff02d77a248fa67df02129e1e02b287edad15fedb2d3a8c7248c596f0b1229",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.56%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-56-1-2d7520edc6ac1170",
+    "version": 1795734696,
+    "width": 1197,
+    "digest": "2d7520edc6ac11706510df290263f94e8f6a24d4b4bf9e79f6152b3ed2443631",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-398ddde00c95ac58",
+    "version": 1795734698,
+    "width": 1200,
+    "digest": "398ddde00c95ac58b9a9c3e069c040b65623f0a5d84086a53af95f72748d62ee",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-1-283df58a2e3c4e4d",
+    "version": 1795734697,
+    "width": 462,
+    "digest": "283df58a2e3c4e4d517b687a5fd416a8e1465cb9d549d69b530fa47507ea756b",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-2-5aaae9db34a9f930",
+    "version": 1795734697,
+    "width": 1197,
+    "digest": "5aaae9db34a9f930fc4619da995581407c9afc66e4babf3d8df6374ce22db8d3",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-3-b2febf2d3ca28151",
+    "version": 1795734697,
+    "width": 1080,
+    "digest": "b2febf2d3ca28151d2bb55cd102685cc06d74a36b2e8d5e1ac1bf9a389265130",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-4-e1e8abea43215058",
+    "version": 1795734698,
+    "width": 1200,
+    "digest": "e1e8abea43215058873b7de3ccb0c180d510ba4858fca90b0f3a2944d0aa865c",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.57%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-57-5-43fda1ceb332f395",
+    "version": 1795734698,
+    "width": 1600,
+    "digest": "43fda1ceb332f395624d939a369c9fe002ad1b8bb3270865a1239bfe70ca8948",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.58.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-58-8961dacb305270c7",
+    "version": 1795734698,
+    "width": 759,
+    "digest": "8961dacb305270c7ec41357d7a799a9677c6cde1ce92be49867711595b0673f0",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.58%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-58-1-c2cea275c1dda14e",
+    "version": 1795734698,
+    "width": 1200,
+    "digest": "c2cea275c1dda14ebe3caddc9e6183603e48b478926e187dc3fc5c682761feb4",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.58%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-58-2-e1c78f8c335bdbf0",
+    "version": 1795734698,
+    "width": 1125,
+    "digest": "e1c78f8c335bdbf0fd8b762f7cf6232290477800ce4d64976ea49a271b7fc84d",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.59.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-59-f1681b918b17392e",
+    "version": 1795734701,
+    "width": 1536,
+    "digest": "f1681b918b17392e0d8a3fdcd832f4737844055e73559e101f4f449994242319",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.22.59%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-22-59-1-af69246b7c1c3367",
+    "version": 1795734699,
+    "width": 759,
+    "digest": "af69246b7c1c3367531ef12fb7a9157bf98083030a4b42f60e7202e5ff3ecc87",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-9c420e17f84b2505",
+    "version": 1795734701,
+    "width": 1125,
+    "digest": "9c420e17f84b2505dc7973d03b922014166dfedd4a7e2d72ecb06c2fe09f8838",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-1-7f9f6ea38edcf9dc",
+    "version": 1795734699,
+    "width": 1197,
+    "digest": "7f9f6ea38edcf9dc5287379839217a493749509e502ccb20ad02779a1ee01314",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-2-13a028ec9e8e953b",
+    "version": 1795734699,
+    "width": 1125,
+    "digest": "13a028ec9e8e953b795433f1e45eb58491ee806ceb35ebe9de3b847bfb6c5c35",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-3-180cc4ee06a47c8d",
+    "version": 1795734700,
+    "width": 1536,
+    "digest": "180cc4ee06a47c8d264db74668fefc5806dd4fc3ce39d2c6cfa16d143a2e2517",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-4-db160a117ea9e276",
+    "version": 1795734700,
+    "width": 1125,
+    "digest": "db160a117ea9e2764cb4ae9b635bb58d5bbf88f50068d55eb17a7a501cce925f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-5-fe32042022de7b6f",
+    "version": 1795734700,
+    "width": 1125,
+    "digest": "fe32042022de7b6ffa0a9d3a52c01a2854f9daf3c20f647d75bd30e0a9643bed",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.00%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-00-6-ec1db8f4e6d19a23",
+    "version": 1795734701,
+    "width": 1197,
+    "digest": "ec1db8f4e6d19a23a8ef967af994c7534cb1f042b0bd62853eb5857466a1fdb5",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-1666cccfe9870dfc",
+    "version": 1795734702,
+    "width": 461,
+    "digest": "1666cccfe9870dfca616a9ba8b2762f440a4272d51c83e563aaa09d96433e9a9",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-1-c2ddb40d22864417",
+    "version": 1795734701,
+    "width": 1080,
+    "digest": "c2ddb40d22864417fc0b23c8ac824af950fdacdc3433e3e4fea6a7759ecf2eed",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-2-a43e3b05a4ce4822",
+    "version": 1795734701,
+    "width": 1125,
+    "digest": "a43e3b05a4ce48224251b1e9f4a48b8552be563c3b9a0160fe60f7d37aaabea2",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-3-35059ef4b8c9c5df",
+    "version": 1795734702,
+    "width": 900,
+    "digest": "35059ef4b8c9c5df2220b9a8c20dee645fe5ce42814bfdc9450eca0f7db5f7e7",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-4-3b68d936ef49b6bd",
+    "version": 1795734702,
+    "width": 1200,
+    "digest": "3b68d936ef49b6bd32b3d9ace532327d7876f2c8f9748d59d239c4ed9a79a76b",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-5-22f1203c5046c8e1",
+    "version": 1795734702,
+    "width": 1200,
+    "digest": "22f1203c5046c8e14d24e4a610ef3f92d640f27e5dd9a839baff70af4fccb84d",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-6-d63a55bdf4435731",
+    "version": 1795734702,
+    "width": 1080,
+    "digest": "d63a55bdf4435731148aeb61b58d48168a3527518d3fa9fed183d0f73ca65970",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.01%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-01-7-40562bc4c8c85e82",
+    "version": 1795734703,
+    "width": 900,
+    "digest": "40562bc4c8c85e824827d941424cd24d1817552c7f3a6c589831a0dc7a5041d7",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-669288fabda46763",
+    "version": 1795734705,
+    "width": 1200,
+    "digest": "669288fabda467635d6f7e8386ce0dd2c971451014f293bf9644095667768e5f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-1-31157f5a06015319",
+    "version": 1795734703,
+    "width": 1200,
+    "digest": "31157f5a060153193f95db61151d8feb765b417c7c76d6183f834edfaeba4238",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-2-c2cea275c1dda14e",
+    "version": 1795734703,
+    "width": 1200,
+    "digest": "c2cea275c1dda14ebe3caddc9e6183603e48b478926e187dc3fc5c682761feb4",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-3-2958f08d0620d33c",
+    "version": 1795734704,
+    "width": 1536,
+    "digest": "2958f08d0620d33c7d828876efb989efe7b2257af4b8e0a8b46e964e6f5f8860",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-4-8744d2a950b3501b",
+    "version": 1795734704,
+    "width": 1200,
+    "digest": "8744d2a950b3501b0c98bd775c372cd99bf84c2486743f004340d2abe61f9cae",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-5-31254f81ac2b806f",
+    "version": 1795734704,
+    "width": 900,
+    "digest": "31254f81ac2b806f08151ad91c5531ca13621be074076a2493a2d7b6b59e8aee",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-6-0fa2c66a29dd3d08",
+    "version": 1795734704,
+    "width": 1080,
+    "digest": "0fa2c66a29dd3d0864e93e0a590ec678d03e3885d80ae2c639fd2e8ee4cf0f8c",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.02%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-02-7-422f1a9def564ad9",
+    "version": 1795734704,
+    "width": 1125,
+    "digest": "422f1a9def564ad902384ec99d73da232dcd65381c5dd4877e53683dae25434f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-e8ab8a1d969b0efa",
+    "version": 1795734706,
+    "width": 1197,
+    "digest": "e8ab8a1d969b0efad5ecaa2dbbb8be0ff877a5f6c39276505ee81473ae4b049e",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-1-ed38670fa3ae30ec",
+    "version": 1795734705,
+    "width": 1125,
+    "digest": "ed38670fa3ae30ecef7be945bc575b658695b23a1ac5a0fef5d74c63772fb759",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-2-fe3ab99838df3a9a",
+    "version": 1795734705,
+    "width": 1200,
+    "digest": "fe3ab99838df3a9a23e0463c23960294c94384bb3489b88fe47ddd7642025234",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-3-f8da87ceb986669b",
+    "version": 1795734705,
+    "width": 759,
+    "digest": "f8da87ceb986669bcf19383246d9bd4a818b82b37439b8f24600a8c4e959bb66",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-4-37f426c613af5d3a",
+    "version": 1795734706,
+    "width": 1125,
+    "digest": "37f426c613af5d3ad407a79a5b6d98ede448e1ea96e30b98818b808866c2bc1f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-5-3fa8d9967200dfce",
+    "version": 1795734706,
+    "width": 1200,
+    "digest": "3fa8d9967200dfcef4aa50f3ce01b3e17d40e305406bde169879fee83fb00cad",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-6-ac9473b855ac6909",
+    "version": 1795734706,
+    "width": 900,
+    "digest": "ac9473b855ac6909c704308ece46f25ca9beabdaaeabbb979634b92716bdc280",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.03%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-03-7-7642a8d17b0bf444",
+    "version": 1795734706,
+    "width": 759,
+    "digest": "7642a8d17b0bf44462db2ccae987d52afa92d15aa3b98dbad5611a294cb6db92",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-a7db816d7bf0f77c",
+    "version": 1795734708,
+    "width": 1200,
+    "digest": "a7db816d7bf0f77c6c1189e0d9052780335f1b59e3b8fd3d3de6e95c9fe87e9a",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-1-8f9429e2acc612fc",
+    "version": 1795734706,
+    "width": 1125,
+    "digest": "8f9429e2acc612fc683ca3874e6b3b57d739018306ac5c77c7fc5068f059f7d3",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-2-9a9379a344114544",
+    "version": 1795734706,
+    "width": 1197,
+    "digest": "9a9379a3441145443a39e82da7780f5f53790bd6acd2546c64e3feee4140f332",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-3-1973eb14abc473ed",
+    "version": 1795734707,
+    "width": 1200,
+    "digest": "1973eb14abc473ed9250a9c4fa19c92481c560d0e77758267a8d374e7731f506",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-4-7d32b7c60bac5aa8",
+    "version": 1795734707,
+    "width": 1536,
+    "digest": "7d32b7c60bac5aa8fb83dee1a38a5ae08176fefdc4535971a35b65cf1446b420",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-5-6371750cb3085faf",
+    "version": 1795734707,
+    "width": 900,
+    "digest": "6371750cb3085faf4b1146352f354ff3d84d7c21aefd4299ab45302352b2a421",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-6-76c554046b4b3ed7",
+    "version": 1795734707,
+    "width": 1200,
+    "digest": "76c554046b4b3ed7163eda68317b4d6f1f6880d50ec72ae29f0385c755841fb9",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-7-476b26e657edfe52",
+    "version": 1795734708,
+    "width": 1080,
+    "digest": "476b26e657edfe52baf9cb2613628bd83581e41c76688cdc0f43197ffe36629f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.04%20(8).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-04-8-585c509bc91413cd",
+    "version": 1795734708,
+    "width": 1125,
+    "digest": "585c509bc91413cdb0254ddf2c746b7c28e94d6e86785ce37d49bee2a232a8e5",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-d24067b63e72b4ee",
+    "version": 1795734710,
+    "width": 1125,
+    "digest": "d24067b63e72b4ee0023adf6a05ecfc4e8c3c2efd52da5f59bae4451ee56d3da",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-1-24874ef0e2a4deab",
+    "version": 1795734708,
+    "width": 1600,
+    "digest": "24874ef0e2a4deabb1464733cccf7340aeebd463a6cba75dc8f15365dc1603ba",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-2-4b72ce1de0ad320e",
+    "version": 1795734709,
+    "width": 1200,
+    "digest": "4b72ce1de0ad320ec528285ce86a4818bdea24880c446520b002c26259c21545",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-3-b31412eccb5ee068",
+    "version": 1795734709,
+    "width": 900,
+    "digest": "b31412eccb5ee068090fcb98b647712e34882a72823a80f851cdcebbd63085ee",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-4-cd772d133194800b",
+    "version": 1795734709,
+    "width": 1200,
+    "digest": "cd772d133194800b672b65745112c2142b1f7548d312b03ece8a2fcfc6a0c160",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-5-c68bedd685c1c24e",
+    "version": 1795734710,
+    "width": 1200,
+    "digest": "c68bedd685c1c24ef89f43d4e88dc7f6c8a0845967663dc05b9766179f83117d",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.05%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-05-6-73473e7b24ddc68f",
+    "version": 1795734710,
+    "width": 1125,
+    "digest": "73473e7b24ddc68f2972841c4f9f71395be9f72059697f88ca633906a9b41f78",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-b63283296d3041ee",
+    "version": 1795734712,
+    "width": 1200,
+    "digest": "b63283296d3041ee2afbef08488382c10c4aef9f722d7e9af9543de434556b3e",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-1-01151f709cc6214f",
+    "version": 1795734710,
+    "width": 1152,
+    "digest": "01151f709cc6214f157866dbede8248caf33595ae5661610ce659172166d22cb",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-2-43486a0e098f38d2",
+    "version": 1795734710,
+    "width": 1080,
+    "digest": "43486a0e098f38d22f3e1a648a7f26b63dd8fad7b5468080aede5c5945942e45",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-3-dce51db556ea3060",
+    "version": 1795734711,
+    "width": 1200,
+    "digest": "dce51db556ea3060f83955057c3393e4a1e871f8463641381b19c6f6da027900",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-4-2857a3776667b0d5",
+    "version": 1795734710,
+    "width": 1200,
+    "digest": "2857a3776667b0d573f2be91008a733532ab70c98ac22103e97909f9aa9cccc2",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-5-b200c576c835675a",
+    "version": 1795734711,
+    "width": 900,
+    "digest": "b200c576c835675a0fbe860350bf1c68864b3fedb0961cbad2040d9ab5f3222b",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-6-666aded78766963f",
+    "version": 1795734711,
+    "width": 1200,
+    "digest": "666aded78766963fed8476f5f4200a7ca1749227275ed1295805b02b59e1605f",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-7-712008e84c72eeff",
+    "version": 1795734711,
+    "width": 1125,
+    "digest": "712008e84c72eeffa6fa54424ea299d03cbf5fdef628ee4c6ae47dfa5a0c2f32",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.06%20(8).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-06-8-347373e35b7439b5",
+    "version": 1795734711,
+    "width": 900,
+    "digest": "347373e35b7439b56b5c16d7733b4c08673e442c4430d40a7421b6f81495a101",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-c27f5150263a3d3d",
+    "version": 1795734714,
+    "width": 914,
+    "digest": "c27f5150263a3d3de281802dc7726dceaba7e2cd658b36856b6a79161a65b87d",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-1-63362250c4ba3541",
+    "version": 1795734712,
+    "width": 1125,
+    "digest": "63362250c4ba3541cc020e11fc572aa4c05ee2b4cc5771678777b7f34afe292c",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-2-825ca503b72b49f6",
+    "version": 1795734713,
+    "width": 1152,
+    "digest": "825ca503b72b49f6d9ef298c6852c1482f095d58df187548e9e5599cca5c3760",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-3-579a9db94eac6867",
+    "version": 1795734712,
+    "width": 1200,
+    "digest": "579a9db94eac68677a0e0a43cddf0cc004b1987d66b79fdaba01d48d9f7741fb",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-4-353d6d7f8a4a15ed",
+    "version": 1795734713,
+    "width": 1200,
+    "digest": "353d6d7f8a4a15edad91911f0bbfeb69a55fc1924205cf2f9565bc3786e82890",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-5-2c162ba47a5989e8",
+    "version": 1795734713,
+    "width": 1200,
+    "digest": "2c162ba47a5989e85757f4a23a0ade8b1154b84ba33dceb6d3fb364bd6ee78bf",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-6-646a571a584cb78e",
+    "version": 1795734713,
+    "width": 1197,
+    "digest": "646a571a584cb78eed95c3d02951fb587492ad30facf0acbbf8d34ae759a4b49",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-7-5aaae9db34a9f930",
+    "version": 1795734714,
+    "width": 1197,
+    "digest": "5aaae9db34a9f930fc4619da995581407c9afc66e4babf3d8df6374ce22db8d3",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(8).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-8-41ed6f48c8c176bc",
+    "version": 1795734714,
+    "width": 1200,
+    "digest": "41ed6f48c8c176bc51935a1c55ba28209b92c82d066892ec8b1b1b709fa149af",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.07%20(9).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-07-9-4ac5a06d7eac3fb8",
+    "version": 1795734714,
+    "width": 900,
+    "digest": "4ac5a06d7eac3fb805e5a720d92d7aead935c6038cf94fd4a80ed7b386f862cb",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-aad58b4b0a5b13a5",
+    "version": 1795734716,
+    "width": 1197,
+    "digest": "aad58b4b0a5b13a572a1e4d614ff39fab70a77a33c606456c46163aaf838fffe",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-1-d044a1f3e132f177",
+    "version": 1795734714,
+    "width": 900,
+    "digest": "d044a1f3e132f17704c086871e468617127b7628ea0357a5852e33a5d3e5d49d",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-2-ea8032132f757317",
+    "version": 1795734714,
+    "width": 900,
+    "digest": "ea8032132f7573178bd6d778f834af1828f7d76c3b1767277a88a7e076df04bf",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-3-5b4c4d47dd772940",
+    "version": 1795734714,
+    "width": 461,
+    "digest": "5b4c4d47dd772940cf9441a46eeb93a673146a7131d50db84a10dd15ee7ae45b",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-4-e27ec0b040b4a7dd",
+    "version": 1795734715,
+    "width": 1536,
+    "digest": "e27ec0b040b4a7dd946b45b6162a889969d0d8a3a84a47940b0c7d08d7026bf8",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-5-c857035e3ce35fcb",
+    "version": 1795734715,
+    "width": 1200,
+    "digest": "c857035e3ce35fcb3e96007a8461b64eec41d41ff40dff8bd2b7943cf0da3d5a",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-6-a1480a4ccd3168fb",
+    "version": 1795734715,
+    "width": 1125,
+    "digest": "a1480a4ccd3168fb30d0bbf1d9d3c9c8d710654ecf2f87ccca19fbf544c01b1e",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-7-7077c747773c2fec",
+    "version": 1795734715,
+    "width": 1080,
+    "digest": "7077c747773c2fec49ad5ffb8c7b613ddc5519aa5343cb2f36ad4e20bd4271b4",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.08%20(8).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-08-8-d100f5cd0055b41a",
+    "version": 1795734716,
+    "width": 1125,
+    "digest": "d100f5cd0055b41afafc4c1a6e14d6c2e8990b66ac6428186441b114d9f9891a",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-5b32b91fef3c6ac1",
+    "version": 1795734718,
+    "width": 759,
+    "digest": "5b32b91fef3c6ac12bf1404ea986cf75d6877eae113176a62ae71bed4b1bdd27",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-1-397d24b1de611945",
+    "version": 1795734716,
+    "width": 1536,
+    "digest": "397d24b1de6119454d8b269d3be984ae061c23b59a47d278f494935d8490706e",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-2-2e4121f09f792d1e",
+    "version": 1795734716,
+    "width": 759,
+    "digest": "2e4121f09f792d1e58ee0376d1904e38015e43da5e204c3c28ca3eb04a9098e6",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(3).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-3-3676d12ef47730d9",
+    "version": 1795734717,
+    "width": 1200,
+    "digest": "3676d12ef47730d9d728f6789ea83fcd8cbfc9b9dbfc6f00e3a4e7c5373ee075",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(4).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-4-98e73cd8398508bc",
+    "version": 1795734717,
+    "width": 1125,
+    "digest": "98e73cd8398508bca37026e8cfdbbbd9e2a0eb29f5cb860f316cc4abd87b86fc",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(5).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-5-a86261a44dfc9c84",
+    "version": 1795734717,
+    "width": 1200,
+    "digest": "a86261a44dfc9c84c17a6edbc573a0480a295894aadadf77241abd5e45ea82a1",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(6).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-6-b31061d1ee767b64",
+    "version": 1795734717,
+    "width": 1125,
+    "digest": "b31061d1ee767b64ebd894e6039a19d09691955976665803c1cc4043f2c77815",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(7).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-7-7783c23b962cc02e",
+    "version": 1795734718,
+    "width": 720,
+    "digest": "7783c23b962cc02e26a2afd2d85194669f2ec9098e289d81681555fb64dfc9a7",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.09%20(8).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-09-8-2190d67ae880326b",
+    "version": 1795734718,
+    "width": 1125,
+    "digest": "2190d67ae880326b2c038bb00b0a423b10de94cdf845fa26b7cf8ae4df5d18f0",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.10.jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-10-38f5dca3014fc851",
+    "version": 1795734719,
+    "width": 1125,
+    "digest": "38f5dca3014fc8517418f5e2d3049a0bdc41a1d44fba1e837ad72b3771ff1e85",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.10%20(1).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-10-1-bac8003d62d9e5f0",
+    "version": 1795734718,
+    "width": 900,
+    "digest": "bac8003d62d9e5f013d5d10bf9f5f6618099a8ab23edd1e71b7aa2d0d76afe6e",
+    "account": "jppwd0ec"
+  },
+  "/galeri/WhatsApp%20Image%202026-11-25%20at%2019.23.10%20(2).jpeg": {
+    "id": "cl-isitma/site/whatsapp-image-2026-11-25-at-19-23-10-2-e1b5935915b695b4",
+    "version": 1795734718,
+    "width": 1532,
+    "digest": "e1b5935915b695b489acf13cbde74de102a88720161cbed801c3bbf8ef261de0",
+    "account": "jppwd0ec"
+  },
+  "/icon.png": {
+    "id": "cl-isitma/site/icon-40e53eefc84a74ed",
+    "version": 1795734719,
+    "width": 256,
+    "digest": "40e53eefc84a74ed9244f008084caba0d2ff9f07722f656cd988999336ae5940",
+    "account": "jppwd0ec"
+  },
+  "https://images.samsung.com/is/image/samsung/assets/tr/business/air-conditioners/about-us/2025_hvac-about-us_n01_kv_pc.jpg": {
+    "id": "cl-isitma/site/2025-hvac-about-us-n01-kv-pc-0813a7d87450f614",
+    "version": 1795734722,
+    "width": 1920,
+    "digest": "0813a7d87450f6140a66e0059773e40518f41ccf5397de1c01c01962fabf2107",
+    "account": "jppwd0ec"
+  },
+  "https://images.samsung.com/is/image/samsung/assets/tr/business/air-conditioners/about-us/2025_hvac-about-us_n07_business-area_card-feature1-1_pc.jpg": {
+    "id": "cl-isitma/site/2025-hvac-about-us-n07-business-area-card-fea-95001f14832b6ef0",
+    "version": 1795734722,
+    "width": 1440,
+    "digest": "95001f14832b6ef08383d727ed5f4252e1db9449b7f4b7eea023ba5ee7bbfe1f",
+    "account": "jppwd0ec"
+  },
+  "https://klima.mitsubishielectric.com.tr/Images/1_20190725114235.jpg": {
+    "id": "cl-isitma/site/1-20190725114235-27ad68daa84d3726",
+    "version": 1795734721,
+    "width": 2000,
+    "digest": "27ad68daa84d372625c81fa481a3f4e3b6eaeab9099991b233517c9a32d4a230",
+    "account": "jppwd0ec"
+  },
+  "https://klima.mitsubishielectric.com.tr/Images/MSZ-HR25VF_02.jpg": {
+    "id": "cl-isitma/site/msz-hr25vf-02-14a48c9e31df3ff8",
+    "version": 1795734720,
+    "width": 1920,
+    "digest": "14a48c9e31df3ff8cc301748d2c0b15918ce4d0c9a0a4e294bbe69c4a5f75614",
+    "account": "jppwd0ec"
+  },
+  "https://st-daikin.mncdn.com/mnresize/700/700/Content/media/ProductImg/original/trftxf25f01-yeni-sensira-9000-btuh-ftxf25f-inverter-klima-r32-638811739716877801.png": {
+    "id": "cl-isitma/site/trftxf25f01-yeni-sensira-9000-btuh-ftxf25f-in-504761800b1298eb",
+    "version": 1795734719,
+    "width": 700,
+    "digest": "504761800b1298ebc742a470c358ca0bb0f652ed258348b00878bf89760c3828",
+    "account": "jppwd0ec"
+  },
+  "https://st-daikin.mncdn.com/mnresize/700/700/Content/media/ProductImg/original/trftxp25n01-shira-eco-9000-btuh-ftxp25n9-inverter-klima-r32-638574071173286729.png": {
+    "id": "cl-isitma/site/trftxp25n01-shira-eco-9000-btuh-ftxp25n9-inve-120c294095082f12",
+    "version": 1795734720,
+    "width": 700,
+    "digest": "120c294095082f12040ebcce81c700fc51c893193c44b7fd169281241eb3012c",
+    "account": "jppwd0ec"
+  },
+  "https://statics.vestel.com.tr/productimages/20292603_r1_1000_1000.jpg": {
+    "id": "cl-isitma/site/20292603-r1-1000-1000-459c4834c27dd108",
+    "version": 1795734721,
+    "width": 1000,
+    "digest": "459c4834c27dd1087d36224c6eed6122451ac51627d9e8e1d9cbb8a38dac1eed",
+    "account": "jppwd0ec"
+  },
+  "https://statics.vestel.com.tr/template/46992716-6ef0-4661-9cee-d060c8857809.jpg": {
+    "id": "cl-isitma/site/46992716-6ef0-4661-9cee-d060c8857809-c14e831a294df64b",
+    "version": 1795734721,
+    "width": 260,
+    "digest": "c14e831a294df64b7e4413048bc7e429a3d6acd4531089187796f45a4e01ab03",
+    "account": "jppwd0ec"
+  },
+  "https://www.bosch-homecomfort.com/ocsmedia/optimized/1180x99999/o554981v389_Climate_4000i_v1.webp": {
+    "id": "cl-isitma/site/o554981v389-climate-4000i-v1-1d8f35bf3d96b47c",
+    "version": 1795734720,
+    "width": 1180,
+    "digest": "1d8f35bf3d96b47ce6991463f4a9bdf51e01a9db02a8f7d7ca41985adc8eb6ae",
+    "account": "jppwd0ec"
+  },
+  "https://www.bosch-homecomfort.com/ocsmedia/optimized/770x99999/o523348v389_Climate_3000i_v4.png": {
+    "id": "cl-isitma/site/o523348v389-climate-3000i-v4-bdfffdeaaf1dedeb",
+    "version": 1795734720,
+    "width": 770,
+    "digest": "bdfffdeaaf1dedeb60d00bce6bdfd7ecd415182e937c75f6a0b70104362379b6",
+    "account": "jppwd0ec"
+  }
+}

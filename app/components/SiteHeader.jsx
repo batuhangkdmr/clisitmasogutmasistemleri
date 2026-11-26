@@ -18,7 +18,6 @@ const corporateItems = [
   ["/kurumsal", "Hakkımızda", "Kim olduğumuz"],
   ["/blog", "Blog", "Saha notları"],
   ["/#surec", "Nasıl çalışıyoruz?", "Keşiften montaja"],
-  ["/#iletisim", "İletişim", "Adres ve telefon"],
   ["/kvkk-aydinlatma-metni", "KVKK Aydınlatma", "Kişisel veri metni"],
   ["/gizlilik-politikasi", "Gizlilik Politikası", "Bilgi kullanımı"],
   ["/cerez-politikasi", "Çerez Politikası", "Çerez bilgilendirmesi"],
@@ -250,7 +249,7 @@ export default function SiteHeader() {
               <Link href="/#hizmet-bolgelerimiz" className="nav-link" onClick={closeAll}>
                 Hizmet Bölgelerimiz
               </Link>
-              <Link href="/#iletisim" className="nav-link" onClick={closeAll}>
+              <Link href="/iletisim" className={`nav-link${pathname === "/iletisim" ? " is-active" : ""}`} aria-current={pathname === "/iletisim" ? "page" : undefined} onClick={closeAll}>
                 İletişim
               </Link>
             </div>

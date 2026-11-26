@@ -1,5 +1,6 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "./lib/site";
+import { mediaUrl } from "./lib/cloudinary-loader";
 import "../style.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -18,17 +19,17 @@ export const metadata = {
     locale: "tr_TR",
     title: "CL Isıtma Sistemleri | Tekkeköy, Samsun",
     description: "Klima, doğalgaz, kombi ve tesisat. Yerinde keşif, net fiyat.",
-    images: [{ url: "/assets/cl-hero.webp", alt: "Duvar tipi klima üzerinde çalışan teknisyen" }],
+    images: [{ url: mediaUrl("/assets/cl-hero.webp", { width: 1200, format: "jpg" }), alt: "Duvar tipi klima üzerinde çalışan teknisyen" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "CL Isıtma Sistemleri | Tekkeköy, Samsun",
     description: "Samsun’da klima, kombi, ısı pompası ve tesisat. Ücretsiz yerinde keşif.",
-    images: ["/assets/cl-hero.webp"],
+    images: [mediaUrl("/assets/cl-hero.webp", { width: 1200, format: "jpg" })],
   },
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: mediaUrl("/icon.png", { width: 64, format: "png" }),
+    apple: mediaUrl("/icon.png", { width: 180, format: "png" }),
   },
 };
 
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
     name: site.name,
     url: site.url,
     email: site.email,
-    image: [`${site.url}/assets/cl-logo.png`, `${site.url}/assets/cl-hero.webp`],
+    image: ["/assets/cl-logo.png", "/assets/cl-hero.webp"].map((src) => new URL(mediaUrl(src), site.url).href),
     telephone: site.phones[0].tel,
     address: {
       "@type": "PostalAddress",

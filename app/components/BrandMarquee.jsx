@@ -1,7 +1,5 @@
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
-import { cwd } from "node:process";
 import Image from "next/image";
+import { mediaFiles } from "../lib/media-files";
 
 const brandNames = {
   arcelik: "Arçelik",
@@ -31,7 +29,7 @@ function BrandRow({ logos, reverse }) {
 }
 
 export default async function BrandMarquee() {
-  const files = await readdir(join(cwd(), "public", "brands"));
+  const files = await mediaFiles("brands");
   const logos = files.filter((file) => /\.(png|webp|jpe?g|svg)$/i.test(file)).sort().map((file) => {
     const slug = file.replace(/\.[^.]+$/, "");
     const name = brandNames[slug] ?? slug.split("-").map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
@@ -42,7 +40,7 @@ export default async function BrandMarquee() {
 
   return (
     <section className="home-section home-brands" aria-labelledby="home-brands-title">
-      <div className="container">
+      <div className="container" data-home-reveal="pending">
         <h2 id="home-brands-title">Çalıştığımız Markalar</h2>
         <p>Isıtma ve soğutma ihtiyaçlarınız için farklı marka ve model seçenekleri sunuyoruz.</p>
         <BrandRow logos={logos.slice(0, split)} />

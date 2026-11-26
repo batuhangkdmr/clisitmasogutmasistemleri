@@ -15,4 +15,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Her dizine açık sayfa için benzersiz başlık, meta açıklama, canonical URL ve sosyal paylaşım etiketleri oluştur. robots.txt ve sitemap.xml’i aynı ana alan adıyla eşleştir. Teşekkür sayfasını dizin dışında tut ve bulunamayan sayfaların HTTP 404 döndürdüğünü doğrula.
 - Hizmet ve satış sayfalarında ziyaretçinin gerçek sorularına yanıt veren 5 SSS hazırla. Gizlilik ve KVKK metinlerini gerçek veri akışıyla tutarlı güncelle.
 - Anlam taşıyan görsellere açıklayıcı alt metin ver. Görselleri mobil boyutlarına uygun sun, görünüm kaymasını önle ve yükleme hızını kontrol et.
+- Siteye eklenen görselleri Cloudinary’ye yükle veya mevcut Cloudinary kaydını kullan. Yerel klasördeki dosyaları yalnızca yükleme kaynağı olarak kullan ve ziyaretçiye Cloudinary üzerinden sun.
 - Yayın izni bulunan gerçek müşteri yorumlarını kullan. Google’ın işletmenin kendi sitesi için yorum yıldızı kurallarını ve yapılandırılmış veri uygunluğunu kontrol et.

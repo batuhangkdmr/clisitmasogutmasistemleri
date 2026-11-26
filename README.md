@@ -38,3 +38,14 @@ npm run build
 E-posta gönderimi için `RESEND_API_KEY`, `RESEND_FROM_EMAIL` ve `RESEND_TO_EMAIL` değişkenlerini sunucu ortamında tanımlayın. MySQL bağlantı kontrolü için `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DATABASE`, `MYSQL_USER` ve `MYSQL_PASSWORD` ayarlarını kullanın. Sağlayıcının TLS yapılandırmasına göre `MYSQL_SSL_MODE` veya `MYSQL_SSL_CA_FILE` da tanımlanabilir. Bağlantıyı `npm run db:check` ile kontrol edebilirsiniz.
 
 Yerel değerleri Git dışında tutulan `.env.local` dosyasına, canlı ortam değerlerini barındırma servisinin ortam değişkenlerine girin.
+
+## Görsel dağıtımı
+
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` görsel teslimatı için derleme ortamında tanımlanır. Toplu yükleme için yerel ortamda ayrıca `CLOUDINARY_API_KEY` ve `CLOUDINARY_API_SECRET` gerekir. Anahtarlar sunucu tarafındaki yükleme komutunda kullanılır.
+
+```bash
+npm run media:sync
+npm run build
+```
+
+Senkronizasyon, `public` içindeki görselleri ve katalogdaki üretici görsellerini yükler. Başarılı yüklemelerin kimlikleri `app/lib/cloudinary-assets.json` dosyasına yazılır. Değişmeyen görseller tekrar yüklenmez. Cloudinary, tarayıcıya uygun formatı ve ekran genişliğine uygun boyutu teslimat sırasında seçer. Katalog, marka şeridi ve galeri görselleri ekrana yaklaştıkça yüklenir.

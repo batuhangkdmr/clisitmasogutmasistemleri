@@ -5,6 +5,7 @@ import BrandMarquee from "./components/BrandMarquee";
 import CardRail from "./components/CardRail";
 import ContactForm from "./components/ContactForm";
 import HomeHero from "./components/HomeHero";
+import HomeScrollReveal from "./components/HomeScrollReveal";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -46,6 +47,7 @@ export default function Home() {
     <>
       <SiteHeader />
       <main>
+        <HomeScrollReveal />
         <HomeHero />
 
         <section className="container home-hero-contact" aria-label="İletişim ve adres bilgileri">
@@ -79,7 +81,7 @@ export default function Home() {
         </section>
 
         <section className="home-section" id="hakkimizda">
-          <div className="container home-about">
+          <div className="container home-about" data-home-reveal="pending">
             <div className="home-about-copy">
               <p className="home-kicker">Samsun / Tekkeköy</p>
               <h2>CL Isıtma ve Soğutma Sistemleri</h2>
@@ -133,7 +135,7 @@ export default function Home() {
         <BrandMarquee />
 
         <section id="hizmetler" className="home-section home-solutions">
-          <div className="container">
+          <div className="container" data-home-reveal="pending">
             <div className="home-section-head">
               <div>
                 <h2>İhtiyaçlarınıza özel çözümler</h2>
@@ -166,7 +168,7 @@ export default function Home() {
         </section>
 
         <section id="iletisim" className="home-section home-contact" aria-labelledby="home-contact-title">
-          <div className="container home-contact-panel">
+          <div className="container home-contact-panel" data-home-reveal="pending">
             <header className="home-contact-heading">
               <h2 id="home-contact-title">Size nasıl yardımcı olabiliriz?</h2>
               <p>Ürün bilgisi, fiyat teklifi, montaj veya ücretsiz keşif için formu doldurun. Talebinizi ekibimize e-posta ile iletelim.</p>
@@ -185,7 +187,7 @@ export default function Home() {
         </section>
 
         <section id="surec" className="home-section home-process" aria-labelledby="home-process-title">
-          <div className="container">
+          <div className="container" data-home-reveal="pending">
             <div className="home-section-head">
               <h2 id="home-process-title">Keşiften uygulamaya</h2>
               <a className="button primary" href="#iletisim">Talebinizi iletin <span aria-hidden="true">→</span></a>
@@ -212,7 +214,7 @@ export default function Home() {
         </section>
 
         <section id="sss" className="home-section faq">
-          <div className="container faq-grid">
+          <div className="container faq-grid" data-home-reveal="pending">
             <div>
               <h2>Sık sorulan sorular</h2>
               <a className="home-text-link" href="#iletisim">Başka bir sorunuz mu var? <span aria-hidden="true">→</span></a>

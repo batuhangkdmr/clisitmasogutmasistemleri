@@ -1,6 +1,6 @@
 import { site } from "./lib/site";
 
-const pages = ["/", "/hizmetler", "/urunler", "/bakim-onarim", "/kurumsal", "/galeri", "/blog",
+const pages = ["/", "/hizmetler", "/urunler", "/bakim-onarim", "/kurumsal", "/iletisim", "/galeri", "/blog",
   "/gizlilik-politikasi", "/kvkk-aydinlatma-metni", "/cerez-politikasi"];
 
 export default function sitemap() {

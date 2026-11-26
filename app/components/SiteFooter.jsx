@@ -22,7 +22,7 @@ const corporateLinks = [
   ["/urunler#kombiler", "Kombiler"],
   ["/#sss", "Sık Sorulan Sorular"],
   ["/#surec", "Nasıl çalışıyoruz?"],
-  ["/#iletisim", "İletişim"],
+  ["/iletisim", "İletişim"],
   ["/kvkk-aydinlatma-metni", "KVKK"],
   ["/gizlilik-politikasi", "Gizlilik"],
   ["/cerez-politikasi", "Çerez Politikası"],
