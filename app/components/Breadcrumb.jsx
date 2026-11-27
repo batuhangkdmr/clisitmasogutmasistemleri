@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { site } from "../lib/site";
 
-export default function Breadcrumb({ title, path, indexable = true }) {
+export default function Breadcrumb({ title, path, indexable = true, parents = [] }) {
+  const linked = [{ name: "Ana Sayfa", href: "/" }, ...parents];
   const trail = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: new URL("/", site.url).href },
-      { "@type": "ListItem", position: 2, name: title, item: new URL(path, site.url).href },
-    ],
+    itemListElement: [...linked, { name: title, href: path }].map(({ name, href }, index) =>
+      ({ "@type": "ListItem", position: index + 1, name, item: new URL(href, site.url).href })),
   };
 
   return (
@@ -16,8 +15,7 @@ export default function Breadcrumb({ title, path, indexable = true }) {
       {indexable && <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(trail).replace(/</g, "\\u003c") }} />}
       <nav className="legal-breadcrumb" aria-label="Sayfa yolu">
-        <Link href="/">Ana Sayfa</Link>
-        <span aria-hidden="true">›</span>
+        {linked.map(({ name, href }) => <span key={href}><Link href={href}>{name}</Link> <span aria-hidden="true">›</span></span>)}
         <span aria-current="page">{title}</span>
       </nav>
     </>

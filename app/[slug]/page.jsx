@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Breadcrumb from "../components/Breadcrumb";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
@@ -9,6 +9,7 @@ import { mediaUrl } from "../lib/cloudinary-loader";
 import { mediaFiles } from "../lib/media-files";
 import { pageMetadata } from "../lib/seo";
 import { site } from "../lib/site";
+import { servicePath, services } from "../lib/services";
 
 const pages = {
   hizmetler: {
@@ -17,30 +18,7 @@ const pages = {
     seoTitle: "Samsun Isıtma, Soğutma ve Tesisat Hizmetleri",
     description: "Samsun ve Tekkeköy’de klima, ısı pompası, doğalgaz, kombi, yerden ısıtma ve tesisat çözümlerini inceleyin.",
     lead: "Tekkeköy ve çevresinde klima, doğalgaz, tesisat ve petek temizliği. Yerinde bakıp net fiyat veriyoruz.",
-    cards: [
-      ["01", "Klima & Isı Pompası", "Satış, montaj ve kapasite seçimi. Markayı bütçenize göre konuşuyoruz.", "klima-isi-pompasi"],
-      ["02", "Doğalgaz & Kombi", "Kombi, doğalgaz hattı, kazan ve soba işleri.", "dogalgaz-kombi"],
-      ["03", "Sıhhi Tesisat", "Yerden ısıtma, güneş enerjisi ve yangın tesisatı.", "sihhi-tesisat"],
-      ["04", "Petek Temizliği", "Bakım tarafında sadece petek temizliği yapıyoruz.", "petek-temizligi"],
-    ],
-  },
-  "bakim-onarim": {
-    eyebrow: "PETEK TEMİZLİĞİ",
-    title: "Petekler eşit ısınmıyor mu?",
-    seoTitle: "Samsun ve Tekkeköy Petek Temizliği",
-    description: "Samsun Tekkeköy’de petek temizliği. Tıkanıklık, vana, basınç ve sızıntı kontrolleriyle ilgili süreç ve keşif bilgisi.",
-    lead: "Bakım hizmetimiz petek temizliği. Önce yerinde bakıyoruz; gerekirse temizlik yapıyoruz.",
-    image: true,
-    checklist: {
-      title: "Temizlikte ne yapıyoruz?",
-      items: [
-        "Vana ve tıkanıklık kontrolü",
-        "Petek içi temizlik",
-        "Isının oda oda dengelenmesi",
-        "Basınç ve sızıntı kontrolü",
-        "İş bitince kısa kullanım notları",
-      ],
-    },
+    cards: services,
   },
   galeri: {
     eyebrow: "UYGULAMALAR",
@@ -60,7 +38,8 @@ const pages = {
   "gizlilik-politikasi": {
     eyebrow: "YASAL",
     title: "Gizlilik Politikası",
-    lead: "Site üzerinden bıraktığınız bilgilerin nasıl kullanıldığını aşağıda özetledik.",
+    lead: "Keşif, ürün ve hizmet taleplerinizde paylaştığınız iletişim bilgilerinin nasıl kullanıldığını öğrenin.",
+    description: "CL Isıtma’nın iletişim formu, telefon ve WhatsApp üzerinden aldığı keşif, ürün ve hizmet taleplerinde kişisel bilgileri nasıl kullandığını öğrenin.",
     sections: [
       {
         title: "1. Kim işliyor?",
@@ -68,7 +47,7 @@ const pages = {
       },
       {
         title: "2. Hangi bilgiler?",
-        body: "Ad soyad, telefon, hizmet seçimi ve varsa seçilen ürün, e-posta ve mesaj. Bu bilgiler form talebine eklenir.",
+        body: "İletişim formunda ad soyad, telefon ve hizmet seçimi alınır. Paylaşmanız hâlinde e-posta adresiniz, mesajınız ve ilgilendiğiniz ürün de talebinize eklenir. Telefonla veya WhatsApp’tan ulaştığınızda talebiniz için paylaştığınız bilgileri kullanırız.",
       },
       {
         title: "3. Ne için?",
@@ -76,7 +55,7 @@ const pages = {
       },
       {
         title: "4. Kimlere gider?",
-        body: "Form bilgileri e-posta iletimi için Resend altyapısı üzerinden iletişim adresimize gönderilir.",
+        body: "Form bilgileri Resend altyapısı üzerinden iletişim adresimize iletilir. WhatsApp’ı seçtiğinizde görüşme WhatsApp üzerinden yürür. Site görselleri Cloudinary üzerinden sunulur. Ayrıntılar için KVKK Aydınlatma Metni’ne bakabilirsiniz.",
       },
       {
         title: "5. Çerezler",
@@ -161,7 +140,7 @@ const pages = {
       },
       {
         title: "2. Ne kullanıyoruz?",
-        body: "Sitenin açılması ve temel işlevler için gerekli teknik çerezler tutulabilir. Reklam veya yeniden pazarlama çerezi kullanmıyoruz.",
+        body: "Yönetim panelinde giriş yapan yetkili kullanıcının oturumunu sürdürmek için sekiz saat geçerli bir oturum çerezi kullanırız. Reklam veya yeniden pazarlama çerezi kullanmıyoruz.",
       },
       {
         title: "3. Üçüncü taraflar",
@@ -207,7 +186,7 @@ const pages = {
 };
 
 export function generateStaticParams() {
-  return Object.keys(pages).map((slug) => ({ slug }));
+  return [...Object.keys(pages), "bakim-onarim"].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
@@ -224,6 +203,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params;
+  if (slug === "bakim-onarim") permanentRedirect(servicePath("petek-temizligi"));
   if (!Object.hasOwn(pages, slug)) notFound();
   const page = pages[slug];
 
@@ -247,11 +227,10 @@ export default async function Page({ params }) {
 
           {page.cards ? (
             <div className="detail-grid">
-              {page.cards.map(([no, title, text, anchor]) => (
-                <article key={title} id={anchor}>
-                  <span>{no}</span>
-                  <h2>{title}</h2>
-                  <p>{text}</p>
+              {page.cards.map(({ slug, title, summary }) => (
+                <article key={slug} id={slug === "sihhi-tesisat-yangin-tesisati" ? "sihhi-tesisat" : slug}>
+                  <h2><Link href={servicePath(slug)}>{title}</Link></h2>
+                  <p>{summary}</p>
                 </article>
               ))}
             </div>
@@ -279,17 +258,6 @@ export default async function Page({ params }) {
             </>
           ) : null}
 
-          {page.checklist ? (
-            <div className="check-panel">
-              <h2>{page.checklist.title}</h2>
-              <ul>
-                {page.checklist.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
           {page.sections
             ? page.sections.map((section) => (
                 <section className="legal-block" key={section.title}>
@@ -314,12 +282,6 @@ export default async function Page({ params }) {
                 </article>
               ))}
             </div>
-          ) : null}
-
-          {page.image ? (
-            <Image className="page-image" src="/assets/teknik-servis.webp"
-              alt="Dış ünitede ölçüm yapan teknik servis çalışanı" width={1086} height={1448}
-              sizes="(max-width: 800px) 94vw, 740px" />
           ) : null}
 
           {page.thanks ? (

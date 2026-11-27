@@ -1,30 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "../lib/site";
+import { servicePath, services } from "../lib/services";
 
 const mapLinks = [
   ["/", "Ana Sayfa"],
   ["/hizmetler", "Hizmetler"],
   ["/urunler", "Ürünlerimiz"],
-  ["/bakim-onarim", "Petek Temizliği"],
   ["/galeri", "Projelerimiz"],
   ["/#hizmet-bolgelerimiz", "Hizmet Bölgelerimiz"],
 ];
-const solutionLinks = [
-  ["/hizmetler#klima-isi-pompasi", "Klima & Isı Pompası"],
-  ["/hizmetler#dogalgaz-kombi", "Doğalgaz & Kombi"],
-  ["/hizmetler#sihhi-tesisat", "Sıhhi Tesisat"],
-  ["/bakim-onarim", "Petek Temizliği"],
-];
+const solutionLinks = services.map(({ slug, title }) => [servicePath(slug), title]);
 const corporateLinks = [
   ["/kurumsal", "Hakkımızda"],
-  ["/urunler#klimalar", "Klimalar"],
-  ["/urunler#kombiler", "Kombiler"],
+  ["/urunler?q=klima", "Klimalar"],
+  ["/urunler?q=kombi", "Kombiler"],
   ["/#sss", "Sık Sorulan Sorular"],
-  ["/#surec", "Nasıl çalışıyoruz?"],
+  ["/nasil-calisiyoruz", "Nasıl çalışıyoruz?"],
   ["/iletisim", "İletişim"],
   ["/kvkk-aydinlatma-metni", "KVKK"],
-  ["/gizlilik-politikasi", "Gizlilik"],
+  ["/gizlilik-politikasi", "Gizlilik Politikası"],
   ["/cerez-politikasi", "Çerez Politikası"],
 ];
 

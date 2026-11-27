@@ -1,13 +1,7 @@
 import Image from "next/image";
-import { mediaFiles } from "../lib/media-files";
-
-const brandNames = {
-  arcelik: "Arçelik",
-  demirdokum: "DemirDöküm",
-  eca: "E.C.A.",
-  lg: "LG",
-  tcl: "TCL",
-};
+import { connection } from "next/server";
+import { readCatalog } from "../lib/catalog-store";
+import { partnerBrands } from "../lib/partner-brands";
 
 function BrandRow({ logos, reverse }) {
   return (
@@ -15,9 +9,9 @@ function BrandRow({ logos, reverse }) {
       <div className="brand-marquee-track">
         {[false, true].map((duplicate) => (
           <ul key={String(duplicate)} className="brand-marquee-group" aria-hidden={duplicate || undefined}>
-            {logos.map(({ file, name }) => (
-              <li key={file} className="brand-marquee-logo">
-                <Image src={`/brands/${encodeURIComponent(file)}`} alt={duplicate ? "" : name}
+            {logos.map(({ id, name, image }) => (
+              <li key={id} className="brand-marquee-logo">
+                <Image src={image.url} alt={duplicate ? "" : name}
                   fill sizes="(max-width: 700px) 100px, 142px" />
               </li>
             ))}
@@ -29,12 +23,8 @@ function BrandRow({ logos, reverse }) {
 }
 
 export default async function BrandMarquee() {
-  const files = await mediaFiles("brands");
-  const logos = files.filter((file) => /\.(png|webp|jpe?g|svg)$/i.test(file)).sort().map((file) => {
-    const slug = file.replace(/\.[^.]+$/, "");
-    const name = brandNames[slug] ?? slug.split("-").map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
-    return { file, name };
-  });
+  await connection();
+  const logos = partnerBrands(await readCatalog());
   if (logos.length === 0) return null;
   const split = Math.ceil(logos.length / 2);
 

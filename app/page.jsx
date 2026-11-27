@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { connection } from "next/server";
 import { Suspense } from "react";
 import BrandMarquee from "./components/BrandMarquee";
 import CardRail from "./components/CardRail";
@@ -9,26 +10,19 @@ import HomeScrollReveal from "./components/HomeScrollReveal";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { boilers } from "./lib/boilers";
+import { publishedCatalog } from "./lib/catalog-store";
+import { categoryTrail, productPath } from "./lib/catalog-view";
+import { productImages } from "./lib/product-images";
 import { featuredProjects, projectImage } from "./lib/home-projects";
 import { pageMetadata } from "./lib/seo";
 import { site } from "./lib/site";
+import { servicePath, services } from "./lib/services";
 
 export const metadata = pageMetadata({
   path: "/",
   title: "CL Isıtma Sistemleri – Samsun Klima, Kombi ve Isı Pompası",
   description: "Samsun Tekkeköy’de klima, kombi ve ısı pompası satışı, yerden ısıtma, tesisat ve petek temizliği. Ücretsiz yerinde keşif için CL Isıtma’ya ulaşın.",
 });
-
-const services = [
-  ["Klima ve ısı pompası", "Mekânınıza uygun kapasiteyi belirleyip satış ve montaj seçeneklerini değerlendiriyoruz.", "/hizmetler", "/assets/hizmet-klima-isi-pompasi.webp", "center 60%"],
-  ["Doğalgaz ve kombi", "Doğalgaz tesisatı, kombi satışı ve montajı için yerinde keşif yapıyoruz.", "/urunler#kombiler", projectImage("WhatsApp Image 2026-11-25 at 19.23.00 (2).jpeg"), "center 48%"],
-  ["Yerden ısıtma", "Konut ve iş yerlerinde mekâna uygun yerden ısıtma uygulamaları.", "/hizmetler", "/assets/hero-yerden-isitma.webp"],
-  ["Sıhhi tesisat ve yangın tesisatı", "Su ve yangın tesisatı ihtiyaçlarını proje kapsamında değerlendiriyoruz.", "/hizmetler", "/assets/hizmet-yangin-tesisati.webp"],
-  ["Katı yakıtlı kazan ve soba", "Farklı ısınma ihtiyaçları ve bütçeler için kazan ve soba seçenekleri.", "/hizmetler", projectImage("WhatsApp Image 2026-11-25 at 19.23.03 (5).jpeg"), "center 70%"],
-  ["Güneş enerjisi", "Binanız ve ihtiyaçlarınız için uygun güneş enerjisi sistemi seçenekleri.", "/hizmetler", "/assets/hero-gunes-enerjisi.webp"],
-  ["Petek temizliği", "Petekler eşit ısınmıyorsa sistemi yerinde kontrol edip temizliyoruz.", "/bakim-onarim", "/assets/hizmet-petek-temizligi.webp"],
-];
 
 const faqs = [
   ["Keşif ücretli mi?", "Yerinde keşif ücretsizdir. İhtiyacınızı değerlendirip uygun seçenekleri ve fiyatı konuşuyoruz."],
@@ -40,9 +34,73 @@ const faqs = [
 
 const cardSizes = "(max-width: 700px) 46vw, (max-width: 1200px) 23vw, 275px";
 
+const featuredProductSlots = [
+  ["kombiler", "VUW 24/24 AS/2-1"],
+  ["klimalar", "FTXF25F"],
+  ["isi-pompalari", "VWL 55/6 A"],
+  ["kati-yakitli-sobalar", "Venüs"],
+  ["kombiler", "Duotec Compact 24"],
+  ["gunes-enerjisi", "Açık Devre"],
+  ["klimalar", "Climate 4000i"],
+  ["yerden-isitma", "Paslanmaz Kollektör"],
+  ["kombiler", "P 24"],
+  ["isi-pompalari", "VWL 85/7.2 AS"],
+  ["kati-yakitli-kazan", "YTP-S"],
+  ["yangin-tesisati", "Sidewall"],
+];
+
+function selectHomeProducts({ products, categories }) {
+  const candidates = products.filter((product) => product.images?.[0]?.url).map((product) => ({
+    product,
+    group: categoryTrail(categories, product.categoryId)[0]?.slug,
+    coverUrl: product.images[0].url,
+  }));
+  const selected = [];
+  const usedCovers = new Set();
+  for (const [group, preferredModel] of featuredProductSlots) {
+    const options = candidates.filter((item) => item.group === group && !usedCovers.has(item.coverUrl));
+    const choice = options.find(({ product }) => product.model === preferredModel) ?? options[0];
+    if (!choice) continue;
+    selected.push(choice.product);
+    usedCovers.add(choice.coverUrl);
+  }
+  for (const { product, group, coverUrl } of candidates) {
+    if (selected.length === featuredProductSlots.length) break;
+    if (group === "kombiler" || usedCovers.has(coverUrl)) continue;
+    selected.push(product);
+    usedCovers.add(coverUrl);
+  }
+  return selected;
+}
+
+async function HomeProducts() {
+  await connection();
+  const products = selectHomeProducts(await publishedCatalog());
+  return (
+    <CardRail id="urunlerimiz" title="Ürünlerimiz" intro="Isıtma, soğutma ve tesisat ürünlerimizi keşfedin. Model ve tedarik bilgisi için bize ulaşın."
+      action={<Link className="home-text-link" href="/urunler">Ürün kataloğunu aç <span aria-hidden="true">→</span></Link>}>
+      {products.map((product) => {
+        const [cover] = productImages(product);
+        return (
+        <li key={product.id} className="home-card home-product">
+          {cover && <div className="home-card-photo">
+            <Image src={cover.url} alt={cover.alt} fill sizes={cardSizes} unoptimized={cover.placeholder} />
+          </div>}
+          <div className="home-card-body">
+            <p className="home-kicker">{product.brand}</p>
+            <h3>{product.name}</h3>
+            {product.summary?.trim() && <p className="home-product-summary">{product.summary}</p>}
+            <Link className="home-text-link" href={productPath(product)}>Ürünü incele <span aria-hidden="true">→</span></Link>
+          </div>
+        </li>
+        );
+      })}
+    </CardRail>
+  );
+}
+
 export default function Home() {
   const phone = site.phones[0];
-
   return (
     <>
       <SiteHeader />
@@ -116,23 +174,11 @@ export default function Home() {
           ))}
         </CardRail>
 
-        <CardRail id="urunlerimiz" title="Ürünlerimiz" intro="Farklı markaların kombi modellerini inceleyin. Fiyat ve stok bilgisi için bize ulaşın."
-          action={<Link className="home-text-link" href="/urunler#kombiler">Ürün kataloğunu aç <span aria-hidden="true">→</span></Link>}>
-          {boilers.map(([brand, model, src]) => (
-            <li key={brand} className="home-card home-boiler">
-              <div className="home-card-photo">
-                <Image src={src} alt={`${brand} ${model} kombi`} fill sizes={cardSizes} />
-              </div>
-              <div className="home-card-body">
-                <p className="home-kicker">{brand}</p>
-                <h3>{model}</h3>
-                <Link className="home-text-link" href={`/?urun=${encodeURIComponent(`${brand} ${model}`)}#iletisim`} aria-label={`${brand} ${model} için bilgi alın`}>Bilgi al <span aria-hidden="true">→</span></Link>
-              </div>
-            </li>
-          ))}
-        </CardRail>
+        <Suspense fallback={<div className="container"><Link href="/urunler">Ürün kataloğunu aç</Link></div>}>
+          <HomeProducts />
+        </Suspense>
 
-        <BrandMarquee />
+        <Suspense><BrandMarquee /></Suspense>
 
         <section id="hizmetler" className="home-section home-solutions">
           <div className="container" data-home-reveal="pending">
@@ -143,16 +189,16 @@ export default function Home() {
               </div>
             </div>
             <div className="home-solutions-grid">
-              {services.map(([title, description, href, photo, objectPosition]) => (
-                <article key={title}>
-                  <Link className="home-solution" href={href}>
+              {services.map(({ slug, title, summary, photo, position }) => (
+                <article key={slug}>
+                  <Link className="home-solution" href={servicePath(slug)}>
                     <div className="home-solution-photo">
                       <Image src={photo} alt="" fill sizes="(max-width: 480px) 90vw, (max-width: 900px) 46vw, 275px"
-                        style={{ objectPosition }} />
+                        style={{ objectPosition: position }} />
                     </div>
                     <div className="home-solution-copy">
                       <h3>{title}</h3>
-                      <p>{description}</p>
+                      <p>{summary}</p>
                       <span className="home-solution-action">İncele <span aria-hidden="true">↗</span></span>
                     </div>
                   </Link>
@@ -190,7 +236,7 @@ export default function Home() {
           <div className="container" data-home-reveal="pending">
             <div className="home-section-head">
               <h2 id="home-process-title">Keşiften uygulamaya</h2>
-              <a className="button primary" href="#iletisim">Talebinizi iletin <span aria-hidden="true">→</span></a>
+              <Link className="button primary" href="/nasil-calisiyoruz">Nasıl çalışıyoruz? <span aria-hidden="true">→</span></Link>
             </div>
             <ol className="home-process-steps" role="list">
               {[

@@ -1,4 +1,9 @@
+import { imageMaxMb } from "./app/lib/catalog-image-policy.mjs";
+
 const nextConfig = {
+  experimental: {
+    serverActions: { bodySizeLimit: `${imageMaxMb + 1}mb` },
+  },
   turbopack: {
     root: process.cwd(),
   },

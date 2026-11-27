@@ -24,7 +24,22 @@ npm ci
 npm run dev
 ```
 
-Site [localhost:3000](http://localhost:3000) adresinde açılır. Ürün kataloğu ve arama, proje içindeki listelerle çalışır.
+Site [localhost:3000](http://localhost:3000) adresinde açılır. Katalog, ürün araması ve ana sayfadaki ürün kartları MySQL’deki yayında olan ürünleri gösterir.
+
+## Ürün kataloğu ve yönetim paneli
+
+MySQL ortam değişkenlerini ayarladıktan sonra katalog tablolarını ve yerel yönetici hesabını bir kez oluşturun.
+
+```bash
+npm run catalog:init
+npm run admin:setup
+```
+
+Panel [localhost:3000/admin](http://localhost:3000/admin) adresindedir. Yerel giriş bilgileri Git dışında tutulan `.env.admin-credentials` dosyasına yazılır. Parolayı parola yöneticinize kaydettikten sonra bu dosyayı kaldırabilirsiniz. Sunucu ortamına `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` ve `ADMIN_SESSION_SECRET` değerlerini girin. Canlı panel HTTPS üzerinden kullanılır.
+
+Önce kategori ekleyin, ardından ürünü oluşturun. Ürün adresi marka, ad ve modelden otomatik üretilir. Teknik özellik alanı serbest metin ve `Özellik: Değer` satırlarını kabul eder. Ürün görsellerini tek alandan ekleyebilir, sıralayabilir veya üründen kaldırabilirsiniz. İlk görsel ürün kartında kapak olarak kullanılır. Görseli olmayan ürünlerde CL Isıtma görseli gösterilir.
+
+Markalar sekmesi ana sayfadaki marka şeridini yönetir ve ürün formuna marka önerileri sağlar. Var olan logolar ve yeni yüklemeler Cloudinary üzerinden sunulur. Ürün yayına alındığında katalogda, navbar aramasında ve sitemap’te görünür. Ürün detayındaki WhatsApp bağlantısı model koduyla birlikte bilgi talebi oluşturur.
 
 ## Kontroller
 
@@ -41,7 +56,7 @@ Yerel değerleri Git dışında tutulan `.env.local` dosyasına, canlı ortam de
 
 ## Görsel dağıtımı
 
-`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` görsel teslimatı için derleme ortamında tanımlanır. Toplu yükleme için yerel ortamda ayrıca `CLOUDINARY_API_KEY` ve `CLOUDINARY_API_SECRET` gerekir. Anahtarlar sunucu tarafındaki yükleme komutunda kullanılır.
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` görsel teslimatı için derleme ortamında tanımlanır. Panel ve toplu yükleme komutu için sunucu ortamında ayrıca `CLOUDINARY_API_KEY` ve `CLOUDINARY_API_SECRET` gerekir.
 
 ```bash
 npm run media:sync

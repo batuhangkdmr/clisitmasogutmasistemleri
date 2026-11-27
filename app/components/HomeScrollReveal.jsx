@@ -14,16 +14,27 @@ export default function HomeScrollReveal() {
       }
     }, { rootMargin: "0px 0px -12px 0px", threshold: 0 });
 
-    for (const section of document.querySelectorAll("[data-home-reveal]")) {
-      for (const child of section.children) {
-        if (child.matches(".home-rail, .home-solutions-grid, .home-process-steps")) {
-          for (const item of child.children) observer.observe(item);
-        } else {
-          observer.observe(child);
+    const observed = new WeakSet();
+    function watchSections() {
+      for (const section of document.querySelectorAll("[data-home-reveal]")) {
+        for (const child of section.children) {
+          const elements = child.matches(".home-rail, .home-solutions-grid, .home-process-steps")
+            ? child.children : [child];
+          for (const element of elements) {
+            if (observed.has(element)) continue;
+            observed.add(element);
+            observer.observe(element);
+          }
         }
       }
     }
-    return () => observer.disconnect();
+    watchSections();
+    const updates = new window.MutationObserver(watchSections);
+    updates.observe(document.querySelector("main"), { childList: true, subtree: true });
+    return () => {
+      updates.disconnect();
+      observer.disconnect();
+    };
   }, []);
 
   return null;

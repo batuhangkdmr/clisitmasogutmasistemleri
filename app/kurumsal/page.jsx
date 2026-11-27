@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 const services = [
   ["Klima, kombi ve ısı pompası", "Mekânınıza ve bütçenize göre farklı marka ve kapasite seçeneklerini birlikte değerlendirelim.", "/urunler", "Ürünleri inceleyin"],
   ["Isıtma ve tesisat", "Doğalgaz, yerden ısıtma, güneş enerjisi, sıhhi tesisat ve yangın tesisatı ihtiyaçlarınızı konuşalım.", "/hizmetler", "Hizmetleri inceleyin"],
-  ["Petek temizliği", "Petekleriniz eşit ısınmıyorsa yerinde kontrol edip temizlik gerekip gerekmediğini değerlendirelim.", "/bakim-onarim", "Petek temizliğini inceleyin"],
+  ["Petek temizliği", "Petekleriniz eşit ısınmıyorsa yerinde kontrol edip temizlik gerekip gerekmediğini değerlendirelim.", "/hizmetler/petek-temizligi", "Petek temizliğini inceleyin"],
 ];
 
 const processSteps = [
