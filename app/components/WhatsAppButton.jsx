@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { site } from "../lib/site";
 
-export default function WhatsAppButton() {
+export default function WhatsAppButton({ showPhone = false }) {
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
@@ -14,6 +14,13 @@ export default function WhatsAppButton() {
 
   return (
     <div className="home-whatsapp">
+      {showPhone && (
+        <a className="service-sticky-phone" href={`tel:${site.phones[0].tel}`} aria-label={`Telefonla arayın: ${site.phones[0].display}`}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M7 3H4.5A1.5 1.5 0 0 0 3 4.5 16.5 16.5 0 0 0 19.5 21a1.5 1.5 0 0 0 1.5-1.5V17l-5-2-1.5 2a12 12 0 0 1-7.5-7.5L9 8 7 3Z" />
+          </svg>
+        </a>
+      )}
       {showHint && (
         <div className="home-whatsapp-hint">
           <span role="status">WhatsApp ile iletişime geçin</span>

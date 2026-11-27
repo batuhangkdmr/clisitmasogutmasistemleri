@@ -2,53 +2,41 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { boilers } from "../lib/boilers";
-import { catalogAnchor, klimalar, kombiler, normalizeProductText } from "../lib/catalog";
+import { normalizeProductText } from "../lib/catalog";
 
-const categories = [
-  { title: "Klimalar", category: "Ürün kategorisi", href: "/urunler#klimalar", keywords: "klima iklimlendirme" },
-  { title: "Kombiler", category: "Ürün kategorisi", href: "/urunler#kombiler", keywords: "kombi yoğuşmalı doğalgaz doğal gaz" },
-  { title: "Doğalgaz sistemleri", category: "Hizmet", href: "/hizmetler#dogalgaz-kombi", keywords: "doğalgaz doğal gaz tesisat" },
-];
-
-const products = [
-  ...categories,
-  ...klimalar.map(([brand, title, description, , tags]) => ({
-    title, brand, category: "Klima",
-    href: `/urunler#${catalogAnchor("klima", title)}`,
-    keywords: [description, ...tags].join(" "),
-  })),
-  ...kombiler.map(([brand, title, description, tags]) => ({
-    title, brand, category: "Kombi",
-    href: `/urunler#${catalogAnchor("kombi", title)}`,
-    keywords: [description, "doğalgaz doğal gaz", ...tags].join(" "),
-  })),
-  ...boilers.map(([brand, model]) => ({
-    title: `${brand} ${model}`, brand, category: "Kombi",
-    href: `/?urun=${encodeURIComponent(`${brand} ${model}`)}#iletisim`,
-    keywords: "doğalgaz doğal gaz kombi",
-    action: "Bilgi al",
-  })),
-].map((item) => ({
-  ...item,
-  searchText: normalizeProductText([item.title, item.brand, item.category, item.keywords].join(" ")),
-}));
+const catalogLink = { title: "Tüm ürünler", category: "Katalog", href: "/urunler" };
 
 export default function ProductSearch({ onOpen }) {
   const dialog = useRef(null);
   const input = useRef(null);
   const [query, setQuery] = useState("");
+  const [entries, setEntries] = useState([]);
+  const [state, setState] = useState("loading");
   const normalizedQuery = normalizeProductText(query);
   const terms = normalizedQuery ? normalizedQuery.split(" ") : [];
   const results = terms.length
-    ? products.filter(({ searchText }) => terms.every((term) => searchText.includes(term)))
-    : categories;
+    ? entries.filter(({ searchText }) => terms.every((term) => searchText.includes(term))).slice(0, 8)
+    : [catalogLink, ...entries.filter((item) => item.category === "Ürün kategorisi").slice(0, 6)];
 
-  function openSearch() {
+  async function openSearch() {
     onOpen();
     setQuery("");
+    setEntries([]);
     dialog.current.showModal();
     input.current.focus();
+    setState("loading");
+    try {
+      const response = await window.fetch("/api/catalog/search");
+      if (!response.ok) throw new Error("Catalog unavailable");
+      const { items } = await response.json();
+      setEntries(items.map((item) => ({
+        ...item, searchText: normalizeProductText([item.title, item.brand, item.category, item.keywords].join(" ")),
+      })));
+      setState("ready");
+    } catch {
+      setEntries([]);
+      setState("error");
+    }
   }
 
   return (
@@ -73,20 +61,23 @@ export default function ProductSearch({ onOpen }) {
             onChange={(event) => setQuery(event.target.value)} placeholder="Örn. Bosch kombi, Daikin klima" />
         </label>
         <p className="product-search-status" role="status">
-          {terms.length ? (results.length ? `${results.length} sonuç` : "Sonuç bulunamadı.") : "Ürün kategorileri"}
+          {!terms.length ? "Ürün kategorileri" : state === "loading" ? "Arama hazırlanıyor…" :
+            state === "error" ? "Kataloğa şu anda ulaşılamıyor." : results.length ? "Eşleşen ürünler" : "Sonuç bulunamadı."}
         </p>
         {results.length > 0 && (
           <ul className="product-search-results">
-            {results.map(({ title, brand, category, href, action }) => (
+            {results.map(({ title, brand, category, href }) => (
               <li key={href}>
                 <Link href={href} prefetch={false} onClick={() => dialog.current.close()}>
                   <span><strong>{title}</strong><small>{brand ? `${category} · ${brand}` : category}</small></span>
-                  <span className="product-search-action">{action ?? "İncele"} <span aria-hidden="true">→</span></span>
+                  <span className="product-search-action">İncele <span aria-hidden="true">→</span></span>
                 </Link>
               </li>
             ))}
           </ul>
         )}
+        {!!terms.length && <Link className="home-text-link" href={`/urunler?q=${encodeURIComponent(query)}`}
+          onClick={() => dialog.current.close()}>Katalogda ara →</Link>}
       </dialog>
     </>
   );
