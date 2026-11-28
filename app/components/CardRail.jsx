@@ -1,6 +1,7 @@
 "use client";
 
-import { Children, useState, useSyncExternalStore } from "react";
+import { Children, useRef, useState, useSyncExternalStore } from "react";
+import { useHomeScrollReveal } from "./HomeScrollReveal";
 
 const mobileQuery = "(max-width: 700px)";
 
@@ -19,6 +20,8 @@ function getServerCardsPerPage() {
 }
 
 export default function CardRail({ id, title, intro, children, action }) {
+  const railRef = useRef(null);
+  useHomeScrollReveal(railRef);
   const cards = Children.toArray(children);
   const cardsPerPage = useSyncExternalStore(subscribe, getCardsPerPage, getServerCardsPerPage);
   const [firstCard, setFirstCard] = useState(0);
@@ -28,7 +31,7 @@ export default function CardRail({ id, title, intro, children, action }) {
 
   return (
     <section id={id} className={`home-section home-rail-section home-${id}`} aria-labelledby={`${id}-title`}>
-      <div className="container" data-home-reveal="pending">
+      <div ref={railRef} className="container" data-home-reveal="rail">
         <div className="home-section-head">
           <div>
             <h2 id={`${id}-title`}>{title}</h2>

@@ -2,14 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdmin } from "../lib/admin-auth";
+import { orderedBlogPosts } from "../lib/blog";
 import { readCatalog } from "../lib/catalog-store";
 import { categoryTrail, productPath } from "../lib/catalog-view";
 import { partnerBrands } from "../lib/partner-brands";
+import { productImages } from "../lib/product-images";
 import EditorForm from "./EditorForm";
+import BlogEditor from "./BlogEditor";
 import DeleteProduct from "./DeleteProduct";
 import ImagePicker from "./ImagePicker";
 import ProductEditorForm from "./ProductEditorForm";
-import { deleteBrand, deleteCategory, deleteProduct, logout, retryCatalogMediaCleanup, saveBrand, saveCategory } from "./actions";
+import { deleteBrand, deleteCategory, deleteProduct, logout, moveBlogPost, retryCatalogMediaCleanup, saveBrand, saveCategory } from "./actions";
 
 const statuses = { draft: "Taslak", published: "Yayında", archived: "Arşivde" };
 
@@ -123,43 +126,78 @@ export default async function AdminPage({ searchParams }) {
     .sort((a, b) => a.localeCompare(b, "tr"));
   const categoryMode = gorunum === "kategoriler";
   const brandMode = gorunum === "markalar";
-  const view = categoryMode ? "kategoriler" : brandMode ? "markalar" : "urunler";
-  const items = categoryMode ? categories : brandMode ? logos : [...catalog.products].sort((a, b) => a.name.localeCompare(b.name, "tr"));
+  const blogMode = gorunum === "blog";
+  const posts = orderedBlogPosts(catalog);
+  const blogPositions = new Map(posts.map((post, index) => [post.id, index + 1]));
+  const featuredPostId = posts.find((post) => post.status === "published")?.id;
+  const view = categoryMode ? "kategoriler" : brandMode ? "markalar" : blogMode ? "blog" : "urunler";
+  const items = categoryMode ? categories : brandMode ? logos : blogMode ? posts : [...catalog.products].sort((a, b) => a.name.localeCompare(b.name, "tr"));
+  const listTitle = categoryMode ? "Kategoriler" : brandMode ? "Markalar" : blogMode ? "Blog yazıları" : "Ürünler";
+  const addLabel = categoryMode ? "Kategori ekle" : brandMode ? "Marka ekle" : blogMode ? "Yazı ekle" : "Ürün ekle";
   const selected = items.find((item) => item.id === id);
   const query = typeof ara === "string" ? ara.slice(0, 100) : "";
-  const list = items.filter((item) => [item.name, item.brand, item.model].join(" ").toLocaleLowerCase("tr").includes(query.toLocaleLowerCase("tr")));
+  const list = items.filter((item) => [item.title ?? item.name, item.brand, item.model].join(" ").toLocaleLowerCase("tr").includes(query.toLocaleLowerCase("tr")));
   return (
     <div className="container admin-container">
       <header className="admin-heading">
-        <div><p className="home-kicker">CL Isıtma</p><h1>Katalog yönetimi</h1></div>
-        <div className="admin-inline"><Link href="/urunler" className="admin-secondary">Kataloğu aç ↗</Link>
+        <div><p className="home-kicker">CL Isıtma</p><h1>{blogMode ? "Blog yönetimi" : "Katalog yönetimi"}</h1></div>
+        <div className="admin-inline"><Link href={blogMode ? "/blog" : "/urunler"} className="admin-secondary">{blogMode ? "Blogu aç ↗" : "Kataloğu aç ↗"}</Link>
           <form action={logout}><button className="admin-secondary">Çıkış yap</button></form>
         </div>
       </header>
-      <nav className="store-tabs" aria-label="Katalog yönetimi">
+      <nav className="store-tabs admin-tabs" aria-label="Yönetim bölümleri">
         <Link href="/admin" aria-current={view === "urunler" ? "page" : undefined}>Ürünler ({catalog.products.length})</Link>
         <Link href="/admin?gorunum=kategoriler" aria-current={categoryMode ? "page" : undefined}>Kategoriler ({catalog.categories.length})</Link>
         <Link href="/admin?gorunum=markalar" aria-current={brandMode ? "page" : undefined}>Markalar ({logos.length})</Link>
+        <Link href="/admin?gorunum=blog" aria-current={blogMode ? "page" : undefined}>Blog ({posts.length})</Link>
       </nav>
       {!catalog.available ? <p className="admin-notice" role="alert">Katalog veritabanına ulaşılamıyor.</p> : (
         <div className="admin-grid">
           <aside className="admin-panel admin-list">
-            <h2>{categoryMode ? "Kategoriler" : brandMode ? "Markalar" : "Ürünler"}</h2>
-            <Link href={editorLink(view)} prefetch={false} className="button primary">{categoryMode ? "Kategori ekle" : brandMode ? "Marka ekle" : "Ürün ekle"}</Link>
+            <header className="admin-list-heading">
+              <h2>{listTitle}</h2>
+              <Link href={editorLink(view)} prefetch={false} className="button primary">{addLabel}</Link>
+            </header>
             <form className="admin-form" action="/admin">
               <input type="hidden" name="gorunum" value={view} />
               <label>Listede ara<input type="search" name="ara" defaultValue={query} maxLength={100} /></label>
             </form>
-            {list.length ? <ul>{list.map((item) => <li key={item.id}><Link href={editorLink(view, item.id)} prefetch={false}
-              aria-current={selected?.id === item.id ? "page" : undefined}>
-              {brandMode ? (
-                <span className="admin-brand-entry">
-                  <Image src={item.image.url} alt="" width={64} height={40} />
-                  <strong>{item.name}</strong>
+            {blogMode && posts.length > 1 && <p className="admin-blog-order-help">İlk sıradaki yayımlanmış yazı blog sayfasında öne çıkar.</p>}
+            {list.length ? <ul className="admin-records">{list.map((item, index) => {
+              const image = blogMode ? item.cover : brandMode ? item.image : categoryMode ? null : productImages(item)[0];
+              const imageSrc = image?.src ?? image?.url;
+              const active = selected?.id === item.id;
+              return <li key={item.id} className={`admin-record${active ? " is-selected" : ""}${blogMode && featuredPostId === item.id ? " is-featured" : ""}`}>
+              <Link href={editorLink(view, item.id)} prefetch={false}
+                className={`admin-record-link${categoryMode ? "" : " has-thumbnail"}`}
+                aria-current={active ? "page" : undefined}>
+                {!categoryMode && <span className={`admin-record-thumbnail${blogMode ? " is-blog-cover" : ""}`}>
+                  {imageSrc ? <Image src={imageSrc} alt="" fill sizes="84px" unoptimized={image?.placeholder} /> : <span>Görsel yok</span>}
+                  {blogMode && <span className="admin-record-position" aria-label={`${blogPositions.get(item.id)}. sıra`}>{blogPositions.get(item.id)}</span>}
+                </span>}
+                <span className="admin-record-copy">
+                  <strong>{categoryMode ? categoryLabel(catalog.categories, item.id) : item.title ?? item.name}</strong>
+                  {view === "urunler" && <small>{item.brand} · {item.model}</small>}
+                  {(blogMode || view === "urunler") && <span className="admin-record-meta">
+                    <small className={`admin-status admin-status-${item.status}`}>{statuses[item.status]}</small>
+                    {blogMode && featuredPostId === item.id && <small className="admin-record-featured">Öne çıkan</small>}
+                  </span>}
                 </span>
-              ) : <strong>{categoryMode ? categoryLabel(catalog.categories, item.id) : item.name}</strong>}
-              {view === "urunler" && <small>{item.brand} · {item.model} · {statuses[item.status]}</small>}
-            </Link></li>)}</ul> : <p className="store-muted">Gösterilecek kayıt yok.</p>}
+              </Link>
+              {blogMode && !query && posts.length > 1 && (
+                <form action={moveBlogPost} className="admin-blog-order" aria-label={`${item.title} sırası`}>
+                  <input type="hidden" name="id" value={item.id} />
+                  <input type="hidden" name="selectedId" value={selected?.id ?? ""} />
+                  <button className="admin-secondary" type="submit" name="direction" value="top" disabled={index === 0}
+                    title="En üste taşı"><span aria-hidden="true">⇈</span> En üste</button>
+                  <button className="admin-secondary" type="submit" name="direction" value="up" disabled={index === 0}
+                    aria-label="Yukarı taşı" title="Yukarı taşı">↑</button>
+                  <button className="admin-secondary" type="submit" name="direction" value="down" disabled={index === posts.length - 1}
+                    aria-label="Aşağı taşı" title="Aşağı taşı">↓</button>
+                </form>
+              )}
+              </li>;
+            })}</ul> : <p className="store-muted">Gösterilecek kayıt yok.</p>}
           </aside>
           <section className="admin-panel admin-editor" id="yonetim-editoru" key={`${view}-${id ?? ""}-${parentId}`}>
             {typeof durum === "string" && <p className="admin-notice" role="status">{durum === "saved" ? "Değişiklik kaydedildi." : durum.slice(0, 200)}</p>}
@@ -172,6 +210,7 @@ export default async function AdminPage({ searchParams }) {
             )}
             {categoryMode ? <CategoryEditor category={selected} categories={categories} parentId={parentId} /> :
               brandMode ? <BrandEditor brand={selected} /> :
+              blogMode ? <BlogEditor post={selected} /> :
               <ProductEditor product={selected} categories={categories} brands={brands} />}
           </section>
         </div>

@@ -6,6 +6,7 @@ export const site = {
   ],
   whatsapp: "905467388987",
   email: "clisitmasistemleri@gmail.com",
+  infoEmail: "info@clisitmasogutmasistemleri.com",
   address: {
     line: "19 Mayıs Mahallesi, 667. Sokak 5/2 B",
     district: "Tekkeköy",

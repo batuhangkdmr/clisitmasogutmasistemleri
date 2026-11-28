@@ -34,8 +34,9 @@ export default function SiteHeaderNav({ serviceItems }) {
   const navRef = useRef(null);
   const closeTimerRef = useRef(null);
   const baseId = useId();
+  const instagramGradient = `${baseId}-instagram-gradient`;
   const urunActive = pathname.startsWith("/urunler");
-  const corpActive = corpActivePaths.includes(pathname);
+  const corpActive = corpActivePaths.includes(pathname) || pathname.startsWith("/blog/");
   const servicesMenu = {
     id: "hizmetler",
     label: "Hizmetlerimiz",
@@ -188,18 +189,39 @@ export default function SiteHeaderNav({ serviceItems }) {
   return (
     <>
       <div className="topbar">
-        <div className="container">
-          <span className="topbar-address">
-            <span className="topbar-address-short">{site.address.line}</span>
-            <span className="topbar-address-full">{site.address.full}</span>
-          </span>
-          <div className="topbar-phones">
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+        <div className="container topbar-inner">
+          <div className="topbar-details">
             {site.phones.map((phone) => (
-              <a key={phone.tel} href={`tel:${phone.tel}`}>
-                {phone.display}
+              <a key={phone.tel} href={`tel:${phone.tel}`} className="topbar-phone">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4.5A1.5 1.5 0 0 0 3 4.5 16.5 16.5 0 0 0 19.5 21a1.5 1.5 0 0 0 1.5-1.5V17l-5-2-1.5 2a12 12 0 0 1-7.5-7.5L9 8 7 3Z" /></svg>
+                <span><span className="topbar-label">Telefon:</span> {phone.display}</span>
               </a>
             ))}
+            <a href={`mailto:${site.infoEmail}`} className="topbar-email">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
+              <span><span className="topbar-label">E-posta:</span> {site.infoEmail}</span>
+            </a>
+          </div>
+          <div className="topbar-links">
+            <Link href="/iletisim" onClick={closeAll}>İletişim</Link>
+            <a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="CL Isıtma Instagram hesabı" className="topbar-instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <defs>
+                  <linearGradient id={instagramGradient} gradientUnits="userSpaceOnUse" x1="4" y1="22" x2="20" y2="2">
+                    <stop stopColor="#feda75" />
+                    <stop offset=".27" stopColor="#fa7e1e" />
+                    <stop offset=".56" stopColor="#d62976" />
+                    <stop offset=".81" stopColor="#962fbf" />
+                    <stop offset="1" stopColor="#4f5bd5" />
+                  </linearGradient>
+                </defs>
+                <g stroke={`url(#${instagramGradient})`}>
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                </g>
+                <circle cx="17.5" cy="6.5" r="1" stroke="none" fill={`url(#${instagramGradient})`} />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
