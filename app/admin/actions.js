@@ -16,6 +16,8 @@ import { partnerBrands } from "../lib/partner-brands";
 import { blogPosts, orderedBlogPosts } from "../lib/blog";
 import { serviceSummaryLimit } from "../lib/blog-content";
 import { services } from "../lib/services";
+import { galleryPhotos } from "../lib/gallery";
+import { homeContent, homeFields, homeSlideIds } from "../lib/home-content";
 
 class InputError extends Error {}
 
@@ -80,6 +82,9 @@ function catalogMediaIds(catalog) {
     ...catalog.products.flatMap(({ images }) => (images ?? []).map(({ url }) => url)),
     ...partnerBrands(catalog).map(({ image }) => image?.url),
     ...blogPosts(catalog).map(({ cover }) => cover?.src),
+    ...galleryPhotos(catalog).map(({ src }) => src),
+    catalog.home?.about?.image,
+    ...Object.values(catalog.home?.slides ?? {}).map(({ image }) => image),
   ];
   return new Set(urls.map(catalogImagePublicId).filter(Boolean));
 }
@@ -100,7 +105,7 @@ async function cleanPendingMedia() {
 const mediaPendingMessage = "Değişiklik kaydedildi. Cloudinary temizliği sırada. Panelden tekrar deneyebilirsiniz.";
 
 async function mutate(view, id, change, afterId = id, returnResult = false) {
-  const trackMedia = view === "urunler" || view === "markalar" || view === "blog";
+  const trackMedia = ["urunler", "markalar", "blog", "galeri", "anasayfa"].includes(view);
   let pending = 0;
   try {
     await changeCatalog((catalog) => {
@@ -118,10 +123,11 @@ async function mutate(view, id, change, afterId = id, returnResult = false) {
   }
   if (pending) pending = await cleanPendingMedia().catch(() => pending);
   revalidatePath("/admin");
-  revalidatePath("/urunler", "layout");
+  if (view !== "anasayfa") revalidatePath("/urunler", "layout");
   if (view === "blog") revalidatePath("/blog", "layout");
+  if (view === "galeri") revalidatePath("/galeri");
   revalidatePath("/");
-  revalidatePath("/sitemap.xml");
+  if (view !== "anasayfa") revalidatePath("/sitemap.xml");
   const next = editorUrl(view, afterId, pending ? mediaPendingMessage : "saved");
   if (returnResult) return { next };
   redirect(next);
@@ -130,7 +136,7 @@ async function mutate(view, id, change, afterId = id, returnResult = false) {
 export async function retryCatalogMediaCleanup(form) {
   await adminOnly();
   const requested = form.get("view");
-  const view = ["blog", "markalar"].includes(requested) ? requested : "urunler";
+  const view = ["blog", "markalar", "galeri", "anasayfa"].includes(requested) ? requested : "urunler";
   const remaining = await cleanPendingMedia().catch(() => 1);
   revalidatePath("/admin");
   redirect(editorUrl(view, "", remaining ? "Cloudinary temizliği henüz tamamlanmadı." : "Cloudinary temizliği tamamlandı."));
@@ -149,6 +155,153 @@ async function selectedImage(file, alt, options) {
   } catch (error) {
     throw new InputError(error instanceof TypeError ? "Görsel yüklenemedi. Tekrar deneyin." : error.message);
   }
+}
+
+export async function saveHomeSlideOrder(form, keepValuesOnError = false) {
+  await adminOnly();
+  return mutate("anasayfa", "", (catalog) => {
+    const ids = form.getAll("itemId");
+    const currentIds = new Set(homeContent(catalog).slides.map(({ id }) => id));
+    if (ids.length !== currentIds.size || new Set(ids).size !== ids.length ||
+        ids.some((id) => !currentIds.has(id))) {
+      throw new InputError("Slayt listesi değişti. Sayfayı yenileyip sırayı tekrar kaydedin.");
+    }
+    const home = catalog.home ??= {};
+    home.slideOrder = ids;
+  }, "", keepValuesOnError);
+}
+
+export async function saveHomeSection(form, keepValuesOnError = false) {
+  await adminOnly();
+  const section = form.get("section");
+  const slideId = form.get("slideId");
+  const newSlide = section === "slide" && slideId === null;
+  let fields, image;
+  try {
+    if (!Object.hasOwn(homeFields, section)) {
+      throw new InputError("Düzenlenecek bölüm bulunamadı.");
+    }
+    fields = Object.fromEntries(homeFields[section].map(([key, , limit]) => [key, value(form, key, limit, true)]));
+    if (section === "contact" && (!/^\+?[0-9 ()-]{7,35}$/.test(fields.phone) ||
+        !/^\+?\d{7,15}$/.test(fields.phone.replace(/[^+0-9]/g, "")) ||
+        !/^[^\s:@?&#]+@[^\s:@?&#]+\.[^\s:@?&#]+$/.test(fields.email))) {
+      throw new InputError("Geçerli bir telefon numarası ve e-posta adresi girin.");
+    }
+    if (section === "slide" || section === "about") {
+      const file = form.get("image");
+      if (newSlide && !file?.size) throw new InputError("Yeni slayt için bir görsel seçin.");
+      image = await selectedImage(file, fields.alt);
+      if (image) fields.image = image.url;
+    }
+  } catch (error) {
+    return writeError(error, "anasayfa", "", keepValuesOnError);
+  }
+
+  const result = await mutate("anasayfa", "", (catalog) => {
+    if (section === "projects" || section === "products") {
+      const ids = form.getAll("itemId");
+      const items = section === "projects" ? galleryPhotos(catalog) :
+        catalog.products.filter(({ status }) => status === "published");
+      const allowed = new Set(items.map(({ id }) => id));
+      if (new Set(ids).size !== ids.length || ids.some((id) => !allowed.has(id))) {
+        throw new InputError("Seçilen kayıtlardan biri artık yayında değil. Listeyi yenileyin.");
+      }
+      fields.ids = ids;
+    }
+    const home = catalog.home ??= {};
+    if (section === "slide") {
+      const slides = home.slides ??= {};
+      if (newSlide) {
+        slides[randomUUID()] = fields;
+      } else {
+        if (!homeSlideIds.includes(slideId) && !Object.hasOwn(slides, slideId)) {
+          throw new InputError("Slayt bulunamadı. Listeyi yenileyin.");
+        }
+        slides[slideId] = { ...slides[slideId], ...fields };
+      }
+    } else {
+      home[section] = { ...home[section], ...fields };
+    }
+  }, "", true);
+
+  if (result.error && image) {
+    const publicId = catalogImagePublicId(image.url);
+    if (publicId) {
+      await changeCatalog((catalog) => {
+        if (!catalogMediaIds(catalog).has(publicId)) {
+          catalog.pendingMediaDeletes = [...new Set([...(catalog.pendingMediaDeletes ?? []), publicId])];
+        }
+      }).then(cleanPendingMedia).catch(() => {});
+    }
+  }
+  if (keepValuesOnError) return result;
+  redirect(result.next ?? editorUrl("anasayfa", "", result.error));
+}
+
+export async function saveGalleryPhoto(form, keepValuesOnError = false) {
+  await adminOnly();
+  const id = String(form.get("id") ?? "");
+  let fields, image;
+  try {
+    fields = {
+      title: value(form, "title", 120, true),
+      description: value(form, "description", 500),
+    };
+    const file = form.get("image");
+    if (!id && !file?.size) throw new InputError("Galeriye eklemek için bir fotoğraf seçin.");
+    image = await selectedImage(file, fields.title);
+  } catch (error) {
+    return writeError(error, "galeri", id, keepValuesOnError);
+  }
+
+  const result = await mutate("galeri", id, (catalog) => {
+    const photos = galleryPhotos(catalog);
+    const old = id ? find(photos, id) : null;
+    const photo = {
+      ...old, ...fields,
+      id: id || randomUUID(),
+      src: image?.url ?? old.src,
+      alt: !image && old?.alt && old.alt !== old.title ? old.alt : fields.title,
+    };
+    catalog.galleryPhotos = old ? photos.map((entry) => entry.id === id ? photo : entry) : [photo, ...photos];
+  }, "", true);
+  if (result.error) {
+    const publicId = catalogImagePublicId(image?.url);
+    if (publicId) {
+      await changeCatalog((catalog) => {
+        if (!catalogMediaIds(catalog).has(publicId)) {
+          catalog.pendingMediaDeletes = [...new Set([...(catalog.pendingMediaDeletes ?? []), publicId])];
+        }
+      }).then(cleanPendingMedia).catch(() => {});
+    }
+    if (keepValuesOnError) return result;
+    redirect(editorUrl("galeri", id, result.error));
+  }
+  if (keepValuesOnError) return result;
+  redirect(result.next);
+}
+
+export async function deleteGalleryPhoto(form) {
+  await adminOnly();
+  const id = String(form.get("id") ?? "");
+  await mutate("galeri", id, (catalog) => {
+    if (form.get("confirmation") !== "delete") throw new InputError("Fotoğrafı silmek için işlemi onaylayın.");
+    const photos = galleryPhotos(catalog);
+    find(photos, id);
+    catalog.galleryPhotos = photos.filter((photo) => photo.id !== id);
+  }, "");
+}
+
+export async function saveGalleryIntro(form, keepValuesOnError = false) {
+  await adminOnly();
+  return mutate("galeri", "", (catalog) => {
+    const photos = galleryPhotos(catalog);
+    const count = Math.min(3, photos.length);
+    const ids = Array.from({ length: count }, (_, index) => value(form, `introPhoto${index + 1}`, 80, true));
+    if (new Set(ids).size !== ids.length) throw new InputError("Her konum için farklı bir fotoğraf seçin.");
+    ids.forEach((id) => find(photos, id));
+    catalog.galleryIntroIds = ids;
+  }, "", keepValuesOnError);
 }
 
 export async function saveBlogPost(form, keepValuesOnError = false) {
