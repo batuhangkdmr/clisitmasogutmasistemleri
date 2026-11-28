@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { env } from "node:process";
-import { createConnection } from "mysql2/promise";
+import { createConnection, createPool } from "mysql2/promise";
 
-export function openMySqlConnection() {
+function connectionOptions() {
   const { MYSQL_HOST, MYSQL_PORT = "3306", MYSQL_USER, MYSQL_DATABASE, MYSQL_PASSWORD } = env;
   if (!MYSQL_HOST || !MYSQL_USER || !MYSQL_DATABASE || !MYSQL_PASSWORD) {
     throw Object.assign(new Error("MySQL connection settings are incomplete."), { code: "MYSQL_CONFIG_MISSING" });
@@ -18,7 +18,7 @@ export function openMySqlConnection() {
     throw Object.assign(new Error("Invalid MySQL TLS mode."), { code: "MYSQL_CONFIG_INVALID" });
   }
 
-  return createConnection({
+  return {
     host: MYSQL_HOST,
     port,
     user: MYSQL_USER,
@@ -34,5 +34,20 @@ export function openMySqlConnection() {
           : {}),
       },
     }),
+  };
+}
+
+export function openMySqlConnection() {
+  return createConnection(connectionOptions());
+}
+
+let catalogReadPool;
+
+export function getCatalogReadPool() {
+  return catalogReadPool ??= createPool({
+    ...connectionOptions(),
+    connectionLimit: 4,
+    maxIdle: 2,
+    idleTimeout: 30_000,
   });
 }

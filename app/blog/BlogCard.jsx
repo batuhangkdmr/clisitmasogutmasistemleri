@@ -10,7 +10,9 @@ export default function BlogCard({ post, featured = false }) {
       <Link href={blogPath(post.slug)}>
         {post.cover && <div className="blog-entry-photo">
           <Image src={post.cover.src} alt={post.cover.alt} fill
-            sizes={featured ? "(max-width: 720px) 94vw, 620px" : "(max-width: 720px) 94vw, (max-width: 1000px) 46vw, 385px"}
+            sizes={featured
+              ? "(max-width: 720px) calc(100vw - 36px), (max-width: 1208px) calc(50vw - 24px), 580px"
+              : "(max-width: 720px) calc(100vw - 36px), (max-width: 1000px) 47vw, (max-width: 1208px) 32vw, 375px"}
             preload={featured} />
         </div>}
         <div className="blog-entry-copy">

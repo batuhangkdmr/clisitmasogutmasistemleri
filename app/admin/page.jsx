@@ -7,12 +7,16 @@ import { readCatalog } from "../lib/catalog-store";
 import { categoryTrail, productPath } from "../lib/catalog-view";
 import { partnerBrands } from "../lib/partner-brands";
 import { productImages } from "../lib/product-images";
+import { galleryIntroPhotos, galleryPhotos, galleryPhotoUrl } from "../lib/gallery";
 import EditorForm from "./EditorForm";
 import BlogEditor from "./BlogEditor";
+import GalleryEditor from "./GalleryEditor";
+import GalleryIntroFields from "./GalleryIntroFields";
+import HomeEditor from "./HomeEditor";
 import DeleteProduct from "./DeleteProduct";
 import ImagePicker from "./ImagePicker";
 import ProductEditorForm from "./ProductEditorForm";
-import { deleteBrand, deleteCategory, deleteProduct, logout, moveBlogPost, retryCatalogMediaCleanup, saveBrand, saveCategory } from "./actions";
+import { deleteBrand, deleteCategory, deleteProduct, logout, moveBlogPost, retryCatalogMediaCleanup, saveBrand, saveCategory, saveGalleryIntro } from "./actions";
 
 const statuses = { draft: "Taslak", published: "Yayında", archived: "Arşivde" };
 
@@ -127,31 +131,51 @@ export default async function AdminPage({ searchParams }) {
   const categoryMode = gorunum === "kategoriler";
   const brandMode = gorunum === "markalar";
   const blogMode = gorunum === "blog";
+  const galleryMode = gorunum === "galeri";
+  const homeMode = gorunum === "anasayfa";
+  const photos = galleryPhotos(catalog);
+  const introIds = galleryMode ? galleryIntroPhotos(photos, catalog.galleryIntroIds).map(({ id }) => id) : [];
   const posts = orderedBlogPosts(catalog);
   const blogPositions = new Map(posts.map((post, index) => [post.id, index + 1]));
   const featuredPostId = posts.find((post) => post.status === "published")?.id;
-  const view = categoryMode ? "kategoriler" : brandMode ? "markalar" : blogMode ? "blog" : "urunler";
-  const items = categoryMode ? categories : brandMode ? logos : blogMode ? posts : [...catalog.products].sort((a, b) => a.name.localeCompare(b.name, "tr"));
-  const listTitle = categoryMode ? "Kategoriler" : brandMode ? "Markalar" : blogMode ? "Blog yazıları" : "Ürünler";
-  const addLabel = categoryMode ? "Kategori ekle" : brandMode ? "Marka ekle" : blogMode ? "Yazı ekle" : "Ürün ekle";
+  const view = categoryMode ? "kategoriler" : brandMode ? "markalar" : blogMode ? "blog" : galleryMode ? "galeri" : "urunler";
+  const items = categoryMode ? categories : brandMode ? logos : blogMode ? posts : galleryMode ? photos : [...catalog.products].sort((a, b) => a.name.localeCompare(b.name, "tr"));
+  const listTitle = categoryMode ? "Kategoriler" : brandMode ? "Markalar" : blogMode ? "Blog yazıları" : galleryMode ? "Galeri fotoğrafları" : "Ürünler";
+  const addLabel = categoryMode ? "Kategori ekle" : brandMode ? "Marka ekle" : blogMode ? "Yazı ekle" : galleryMode ? "Fotoğraf ekle" : "Ürün ekle";
   const selected = items.find((item) => item.id === id);
   const query = typeof ara === "string" ? ara.slice(0, 100) : "";
-  const list = items.filter((item) => [item.title ?? item.name, item.brand, item.model].join(" ").toLocaleLowerCase("tr").includes(query.toLocaleLowerCase("tr")));
+  const list = items.filter((item) => [item.title ?? item.name, item.brand, item.model, galleryMode ? item.description : ""].join(" ").toLocaleLowerCase("tr").includes(query.toLocaleLowerCase("tr")));
   return (
     <div className="container admin-container">
       <header className="admin-heading">
-        <div><p className="home-kicker">CL Isıtma</p><h1>{blogMode ? "Blog yönetimi" : "Katalog yönetimi"}</h1></div>
-        <div className="admin-inline"><Link href={blogMode ? "/blog" : "/urunler"} className="admin-secondary">{blogMode ? "Blogu aç ↗" : "Kataloğu aç ↗"}</Link>
+        <div><p className="home-kicker">CL Isıtma</p><h1>{homeMode ? "Anasayfa yönetimi" : galleryMode ? "Galeri yönetimi" : blogMode ? "Blog yönetimi" : "Katalog yönetimi"}</h1></div>
+        <div className="admin-inline"><Link href={homeMode ? "/" : galleryMode ? "/galeri" : blogMode ? "/blog" : "/urunler"} className="admin-secondary">{homeMode ? "Anasayfayı aç ↗" : galleryMode ? "Galeriyi aç ↗" : blogMode ? "Blogu aç ↗" : "Kataloğu aç ↗"}</Link>
           <form action={logout}><button className="admin-secondary">Çıkış yap</button></form>
         </div>
       </header>
       <nav className="store-tabs admin-tabs" aria-label="Yönetim bölümleri">
-        <Link href="/admin" aria-current={view === "urunler" ? "page" : undefined}>Ürünler ({catalog.products.length})</Link>
+        <Link href="/admin" aria-current={!homeMode && view === "urunler" ? "page" : undefined}>Ürünler ({catalog.products.length})</Link>
         <Link href="/admin?gorunum=kategoriler" aria-current={categoryMode ? "page" : undefined}>Kategoriler ({catalog.categories.length})</Link>
         <Link href="/admin?gorunum=markalar" aria-current={brandMode ? "page" : undefined}>Markalar ({logos.length})</Link>
         <Link href="/admin?gorunum=blog" aria-current={blogMode ? "page" : undefined}>Blog ({posts.length})</Link>
+        <Link href="/admin?gorunum=galeri" aria-current={galleryMode ? "page" : undefined}>Galeri ({photos.length})</Link>
+        <Link href="/admin?gorunum=anasayfa" aria-current={homeMode ? "page" : undefined}>Anasayfa</Link>
       </nav>
-      {!catalog.available ? <p className="admin-notice" role="alert">Katalog veritabanına ulaşılamıyor.</p> : (
+      {!catalog.available ? <p className="admin-notice" role="alert">Katalog veritabanına ulaşılamıyor.</p> : homeMode ? (
+        <HomeEditor catalog={catalog} status={durum} />
+      ) : (
+        <>
+        {galleryMode && (
+          <section className="admin-panel admin-gallery-intro">
+            <h2>Projelerimiz alanındaki 3 görseli değiştir</h2>
+            <p className="store-muted">Galeri sayfasının üst bölümünde gösterilecek fotoğrafları seçin. Yeni bir görsel için önce galeriye fotoğraf ekleyin.</p>
+            {introIds.length > 0 && <EditorForm save={saveGalleryIntro} key={introIds.join(",")}>
+              <GalleryIntroFields initialIds={introIds}
+                photos={photos.map(({ id, src, title }, index) => ({ id, src, title, number: index + 1 }))} />
+              <button type="submit" className="button primary">Üst bölüm görsellerini kaydet</button>
+            </EditorForm>}
+          </section>
+        )}
         <div className="admin-grid">
           <aside className="admin-panel admin-list">
             <header className="admin-list-heading">
@@ -164,19 +188,20 @@ export default async function AdminPage({ searchParams }) {
             </form>
             {blogMode && posts.length > 1 && <p className="admin-blog-order-help">İlk sıradaki yayımlanmış yazı blog sayfasında öne çıkar.</p>}
             {list.length ? <ul className="admin-records">{list.map((item, index) => {
-              const image = blogMode ? item.cover : brandMode ? item.image : categoryMode ? null : productImages(item)[0];
+              const image = galleryMode ? item : blogMode ? item.cover : brandMode ? item.image : categoryMode ? null : productImages(item)[0];
               const imageSrc = image?.src ?? image?.url;
               const active = selected?.id === item.id;
               return <li key={item.id} className={`admin-record${active ? " is-selected" : ""}${blogMode && featuredPostId === item.id ? " is-featured" : ""}`}>
               <Link href={editorLink(view, item.id)} prefetch={false}
                 className={`admin-record-link${categoryMode ? "" : " has-thumbnail"}`}
                 aria-current={active ? "page" : undefined}>
-                {!categoryMode && <span className={`admin-record-thumbnail${blogMode ? " is-blog-cover" : ""}`}>
+                {!categoryMode && <span className={`admin-record-thumbnail${blogMode || galleryMode ? " is-blog-cover" : ""}`}>
                   {imageSrc ? <Image src={imageSrc} alt="" fill sizes="84px" unoptimized={image?.placeholder} /> : <span>Görsel yok</span>}
                   {blogMode && <span className="admin-record-position" aria-label={`${blogPositions.get(item.id)}. sıra`}>{blogPositions.get(item.id)}</span>}
                 </span>}
                 <span className="admin-record-copy">
                   <strong>{categoryMode ? categoryLabel(catalog.categories, item.id) : item.title ?? item.name}</strong>
+                  {galleryMode && item.description && <small>{item.description}</small>}
                   {view === "urunler" && <small>{item.brand} · {item.model}</small>}
                   {(blogMode || view === "urunler") && <span className="admin-record-meta">
                     <small className={`admin-status admin-status-${item.status}`}>{statuses[item.status]}</small>
@@ -211,9 +236,11 @@ export default async function AdminPage({ searchParams }) {
             {categoryMode ? <CategoryEditor category={selected} categories={categories} parentId={parentId} /> :
               brandMode ? <BrandEditor brand={selected} /> :
               blogMode ? <BlogEditor post={selected} /> :
+              galleryMode ? <GalleryEditor photo={selected} publicHref={selected ? galleryPhotoUrl(selected, photos.indexOf(selected)) : undefined} /> :
               <ProductEditor product={selected} categories={categories} brands={brands} />}
           </section>
         </div>
+        </>
       )}
     </div>
   );

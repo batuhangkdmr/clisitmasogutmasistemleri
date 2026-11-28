@@ -1,19 +1,15 @@
 import { cache } from "react";
-import { openMySqlConnection } from "./mysql.mjs";
+import { getCatalogReadPool, openMySqlConnection } from "./mysql.mjs";
 
 const emptyCatalog = { categories: [], products: [] };
 
 export const readCatalog = cache(async () => {
-  let connection;
   try {
-    connection = await openMySqlConnection();
-    const [[row]] = await connection.query("SELECT content FROM cl_catalog WHERE id = 1");
+    const [[row]] = await getCatalogReadPool().query("SELECT content FROM cl_catalog WHERE id = 1");
     if (!row) throw new Error("Catalog row missing");
     return { ...JSON.parse(row.content), available: true };
   } catch {
     return { ...emptyCatalog, available: false };
-  } finally {
-    await connection?.end();
   }
 });
 

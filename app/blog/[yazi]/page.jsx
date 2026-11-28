@@ -103,7 +103,8 @@ export default async function BlogPostPage({ params }) {
                 <Link className="button primary" href="/iletisim#iletisim-formu">Ücretsiz keşif iste <span aria-hidden="true">→</span></Link>
               </div>
               {post.cover && <div className="blog-article-photo">
-                <Image src={post.cover.src} alt={post.cover.alt} fill sizes="(max-width: 720px) 94vw, 570px" preload />
+                <Image src={post.cover.src} alt={post.cover.alt} fill
+                  sizes="(max-width: 720px) calc(100vw - 36px), (max-width: 1208px) 47vw, 550px" preload />
               </div>}
             </header>
             <div className="blog-article-layout">

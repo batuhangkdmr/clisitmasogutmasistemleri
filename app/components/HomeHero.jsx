@@ -3,14 +3,6 @@
 import Image, { getImageProps } from "next/image";
 import { useEffect, useState } from "react";
 
-const slides = [
-  ["klima-hd", "Klima satışı ve montajı", "Evinize veya iş yerinize uygun kapasiteyi ve marka seçeneklerini ücretsiz keşifte belirleyelim.", "Duvar tipi klima iç ünitesini monte eden teknisyen", "63% 30%"],
-  ["kombi", "Kombi ve doğalgaz", "Isınma ve sıcak su ihtiyacınıza uygun kombiyi seçelim, doğalgaz tesisatını ve montajı planlayalım.", "Mutfakta duvara monte edilmiş kombi"],
-  ["isi-pompasi-hd", "Isı pompası sistemleri", "Yazın soğutma, kışın ısıtma için mekânınıza uygun ısı pompasını birlikte seçelim.", "Evin dış cephesine kurulmuş hava kaynaklı ısı pompası", "54% 58%"],
-  ["yerden-isitma-hd", "Yerden ısıtma", "Yeni yapınız ya da tadilatınız için zeminden ısıtma sistemini yerinde değerlendirelim.", "Döşeme kapatılmadan önce zemine serilmiş kırmızı ısıtma boruları", "62% 62%"],
-  ["gunes-enerjisi-hd", "Güneş enerjisi", "Sıcak su ihtiyacınız için binanıza uygun güneş enerjisi sistemi seçeneklerini değerlendirelim.", "Kiremit çatıda sıcak su için kullanılan güneş kolektörleri", "68% 58%"],
-];
-
 const { props: { srcSet: desktopBoilerSrcSet } } = getImageProps({
   src: "/assets/hero-kombi-desktop.webp",
   alt: "",
@@ -18,74 +10,86 @@ const { props: { srcSet: desktopBoilerSrcSet } } = getImageProps({
   sizes: "100vw",
 });
 
-export default function HomeHero() {
-  const [{ index, direction }, setSlide] = useState({ index: 0, direction: 0 });
-  const [firstImageReady, setFirstImageReady] = useState(false);
+export default function HomeHero({ slides, eyebrow }) {
+  const [carousel, setCarousel] = useState({ index: 0, direction: 0, pending: null, ready: [], failed: [] });
+  const { index, direction, pending, ready, failed } = carousel;
+  const firstSettled = ready.includes(0) || failed.includes(0);
+  const next = nextSlide(index, 1, failed, slides.length);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setSlide((current) => ({ index: (current.index + 1) % slides.length, direction: 1 }));
-    }, 3000);
+    if (!firstSettled || pending || next === index) return;
+    const timer = window.setTimeout(() => setCarousel((current) => requestSlide(current, next, 1)), 3000);
     return () => window.clearTimeout(timer);
-  }, [index]);
+  }, [firstSettled, index, next, pending]);
 
   function move(offset) {
-    setSlide((current) => ({
-      index: (current.index + offset + slides.length) % slides.length,
-      direction: offset,
-    }));
+    setCarousel((current) => {
+      const from = current.pending?.index ?? current.index;
+      return requestSlide(current, nextSlide(from, offset, current.failed, slides.length), offset);
+    });
+  }
+
+  function settle(position, loaded) {
+    setCarousel((current) => {
+      if (current.ready.includes(position) || current.failed.includes(position)) return current;
+      const field = loaded ? "ready" : "failed";
+      const updated = { ...current, [field]: [...current[field], position] };
+      if (current.pending?.index !== position) return updated;
+      return loaded ? { ...updated, ...current.pending, pending: null } : { ...updated, pending: null };
+    });
   }
 
   function handleKey(event) {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
     const offset = event.key === "ArrowRight" ? 1 : -1;
-    const next = (index + offset + slides.length) % slides.length;
+    const target = nextSlide(pending?.index ?? index, offset, failed, slides.length);
     move(offset);
-    event.currentTarget.querySelectorAll(".home-slider-line")[next]?.focus();
+    event.currentTarget.querySelectorAll(".home-slider-line")[target]?.focus();
   }
 
   return (
     <section className="home-hero" id="ana-sayfa" aria-labelledby="home-hero-title">
       <div className="home-hero-visual">
-        {slides.map(([id, , , alt, objectPosition], position) => {
-          if (!firstImageReady && position !== 0 && position !== index) return null;
+        {slides.map(({ id, image, alt, objectPosition }, position) => {
+          const shouldLoad = position === 0 || position === index || ready.includes(position) ||
+            position === pending?.index || (firstSettled && !pending && position === next);
+          if (!shouldLoad) return null;
           const imageProps = {
-            src: `/assets/hero-${id}.webp`,
+            src: image,
             alt: position === index ? alt : "",
             fill: true,
             sizes: "100vw",
             loading: "eager",
-            fetchPriority: position === 0 ? "high" : "low",
+            fetchPriority: position === 0 ? "high" : pending?.index === position ? "auto" : "low",
             className: "home-hero-photo",
             style: { objectPosition },
             "data-active": position === index,
             "data-direction": position === index ? direction : 0,
           };
-          if (id === "kombi") {
+          if (id === "kombi" && image === "/assets/hero-kombi.webp") {
             return (
               <picture key={id} className="home-hero-boiler">
                 <source media="(min-width: 801px)" srcSet={desktopBoilerSrcSet} sizes="100vw" />
-                <img {...getImageProps(imageProps).props} />
+                <img {...getImageProps(imageProps).props} onLoad={() => settle(position, true)} onError={() => settle(position, false)} />
               </picture>
             );
           }
           return (
             <Image key={id} {...imageProps}
-              onLoad={position === 0 ? () => setFirstImageReady(true) : undefined}
-              onError={position === 0 ? () => setFirstImageReady(true) : undefined} />
+              onLoad={() => settle(position, true)} onError={() => settle(position, false)} />
           );
         })}
       </div>
       <div className="container home-hero-inner">
-        <p className="home-kicker">CL Isıtma ve Soğutma Sistemleri</p>
+        <p className="home-kicker">{eyebrow}</p>
         <h1 id="home-hero-title" className="home-hero-copy-stack">
-          {slides.map(([id, title], position) => (
+          {slides.map(({ id, title }, position) => (
             <span key={id} data-active={position === index}>{title}</span>
           ))}
         </h1>
         <p className="home-hero-summary home-hero-copy-stack">
-          {slides.map(([id, , description], position) => (
+          {slides.map(({ id, description }, position) => (
             <span key={id} data-active={position === index}>{description}</span>
           ))}
         </p>
@@ -97,12 +101,28 @@ export default function HomeHero() {
       <button className="home-hero-arrow home-hero-prev" type="button" aria-label="Önceki slayt" onClick={() => move(-1)}>&lt;</button>
       <button className="home-hero-arrow home-hero-next" type="button" aria-label="Sonraki slayt" onClick={() => move(1)}>&gt;</button>
       <div className="home-slider-controls" role="group" aria-label="Slayt görselleri" onKeyDown={handleKey}>
-        {slides.map(([id, title], position) => (
+        {slides.map(({ id, title }, position) => (
           <button key={id} type="button" className="home-slider-line" aria-label={title}
             aria-current={index === position ? "true" : undefined}
-            onClick={() => setSlide({ index: position, direction: Math.sign(position - index) })} />
+            onClick={() => setCarousel((current) => requestSlide(current, position, Math.sign(position - current.index)))} />
         ))}
       </div>
     </section>
   );
+}
+
+function nextSlide(index, direction, failed, count) {
+  for (let step = 1; step < count; step++) {
+    const position = (index + direction * step + count) % count;
+    if (!failed.includes(position)) return position;
+  }
+  return index;
+}
+
+function requestSlide(current, index, direction) {
+  if (current.failed.includes(index)) return current;
+  if (index === current.index || current.ready.includes(index)) {
+    return { ...current, index, direction, pending: null };
+  }
+  return { ...current, pending: { index, direction } };
 }

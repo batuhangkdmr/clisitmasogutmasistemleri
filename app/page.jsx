@@ -10,11 +10,12 @@ import HomeScrollReveal from "./components/HomeScrollReveal";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { publishedCatalog } from "./lib/catalog-store";
-import { categoryTrail, productPath } from "./lib/catalog-view";
+import { publishedCatalog, readCatalog } from "./lib/catalog-store";
+import { productPath } from "./lib/catalog-view";
 import { productImages } from "./lib/product-images";
-import { featuredProjects, projectImage } from "./lib/home-projects";
+import { galleryPhotoUrl, galleryPhotos } from "./lib/gallery";
 import { pageMetadata } from "./lib/seo";
+import { homeContent, orderedHomeItems, selectHomeProducts } from "./lib/home-content";
 import { site } from "./lib/site";
 import { servicePath, services } from "./lib/services";
 
@@ -34,50 +35,40 @@ const faqs = [
 
 const cardSizes = "(max-width: 700px) 46vw, (max-width: 1200px) 23vw, 275px";
 
-const featuredProductSlots = [
-  ["kombiler", "VUW 24/24 AS/2-1"],
-  ["klimalar", "FTXF25F"],
-  ["isi-pompalari", "VWL 55/6 A"],
-  ["kati-yakitli-sobalar", "Venüs"],
-  ["kombiler", "Duotec Compact 24"],
-  ["gunes-enerjisi", "Açık Devre"],
-  ["klimalar", "Climate 4000i"],
-  ["yerden-isitma", "Paslanmaz Kollektör"],
-  ["kombiler", "P 24"],
-  ["isi-pompalari", "VWL 85/7.2 AS"],
-  ["kati-yakitli-kazan", "YTP-S"],
-  ["yangin-tesisati", "Sidewall"],
-];
-
-function selectHomeProducts({ products, categories }) {
-  const candidates = products.filter((product) => product.images?.[0]?.url).map((product) => ({
-    product,
-    group: categoryTrail(categories, product.categoryId)[0]?.slug,
-    coverUrl: product.images[0].url,
-  }));
-  const selected = [];
-  const usedCovers = new Set();
-  for (const [group, preferredModel] of featuredProductSlots) {
-    const options = candidates.filter((item) => item.group === group && !usedCovers.has(item.coverUrl));
-    const choice = options.find(({ product }) => product.model === preferredModel) ?? options[0];
-    if (!choice) continue;
-    selected.push(choice.product);
-    usedCovers.add(choice.coverUrl);
-  }
-  for (const { product, group, coverUrl } of candidates) {
-    if (selected.length === featuredProductSlots.length) break;
-    if (group === "kombiler" || usedCovers.has(coverUrl)) continue;
-    selected.push(product);
-    usedCovers.add(coverUrl);
-  }
-  return selected;
+async function HomeProjects() {
+  await connection();
+  const catalog = await readCatalog();
+  const photos = catalog.available ? galleryPhotos(catalog) : [];
+  const { projects } = homeContent(catalog);
+  const indexed = photos.map((photo, index) => ({ ...photo, index }));
+  const selected = orderedHomeItems(indexed, projects.ids, indexed.filter(({ featured }) => featured));
+  return (
+    <CardRail id="projelerimiz" title="Projelerimiz" intro={projects.intro}
+      action={<Link className="home-text-link" href="/galeri">Tüm proje fotoğraflarını gör <span aria-hidden="true">→</span></Link>}>
+      {selected.map((photo) => (
+        <li key={photo.id} className="home-card">
+          <Link href={galleryPhotoUrl(photo, photo.index)} className="home-project-link">
+            <div className="home-card-photo">
+              <Image src={photo.src} alt={photo.alt || photo.title} fill sizes={cardSizes} />
+            </div>
+            <div className="home-card-body">
+              <h3>{photo.title}</h3>
+              <span className="home-text-link">İncele <span aria-hidden="true">→</span></span>
+            </div>
+          </Link>
+        </li>
+      ))}
+    </CardRail>
+  );
 }
 
 async function HomeProducts() {
   await connection();
-  const products = selectHomeProducts(await publishedCatalog());
+  const catalog = await publishedCatalog();
+  const { products: settings } = homeContent(catalog);
+  const products = orderedHomeItems(catalog.products, settings.ids, settings.ids ? [] : selectHomeProducts(catalog));
   return (
-    <CardRail id="urunlerimiz" title="Ürünlerimiz" intro="Isıtma, soğutma ve tesisat ürünlerimizi keşfedin. Model ve tedarik bilgisi için bize ulaşın."
+    <CardRail id="urunlerimiz" title="Ürünlerimiz" intro={settings.intro}
       action={<Link className="home-text-link" href="/urunler">Ürün kataloğunu aç <span aria-hidden="true">→</span></Link>}>
       {products.map((product) => {
         const [cover] = productImages(product);
@@ -99,14 +90,16 @@ async function HomeProducts() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  await connection();
+  const { hero, slides, contact, about } = homeContent(await readCatalog());
   const phone = site.phones[0];
   return (
     <>
       <SiteHeader />
       <main>
         <HomeScrollReveal />
-        <HomeHero />
+        <HomeHero key={slides.map(({ id }) => id).join(",")} slides={slides} eyebrow={hero.eyebrow} />
 
         <section className="container home-hero-contact" aria-label="İletişim ve adres bilgileri">
           <div className="home-hero-contact-detail">
@@ -114,9 +107,9 @@ export default function Home() {
               <path d="M7 3H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3l-5-2-1.5 2.5a14 14 0 0 1-8-8L9 8 7 3Z" />
             </svg>
             <div>
-              <h2>İletişim</h2>
-              <a href={`tel:${phone.tel}`}>{phone.display}</a>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
+              <h2>{contact.title}</h2>
+              <a href={`tel:${contact.phone === site.phones[0].display ? site.phones[0].tel : contact.phone.replace(/[^+0-9]/g, "")}`}>{contact.phone}</a>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
             </div>
           </div>
           <div className="home-hero-contact-detail">
@@ -125,15 +118,15 @@ export default function Home() {
               <circle cx="12" cy="10" r="2.5" />
             </svg>
             <div>
-              <h2>Adres</h2>
-              <address>{site.address.full}</address>
+              <h2>{contact.addressTitle}</h2>
+              <address>{contact.address}</address>
             </div>
           </div>
           <a className="home-hero-contact-card" href="#iletisim">
             <Image src="/assets/cl-logo.png" alt="" width={58} height={58} />
             <span>
-              <strong>CL Isıtma ve Soğutma Sistemleri</strong>
-              Isıtma, soğutma ve tesisat ihtiyaçlarınız için konuşalım. <span aria-hidden="true">→</span>
+              <strong>{contact.cardTitle}</strong>
+              {contact.cardText} <span aria-hidden="true">→</span>
             </span>
           </a>
         </section>
@@ -141,38 +134,25 @@ export default function Home() {
         <section className="home-section" id="hakkimizda">
           <div className="container home-about" data-home-reveal="pending">
             <div className="home-about-copy">
-              <p className="home-kicker">Samsun / Tekkeköy</p>
-              <h2>CL Isıtma ve Soğutma Sistemleri</h2>
-              <p><strong>20 yıllık ustalık tecrübesiyle ev ve iş yerlerine ısıtma, soğutma ve tesisat çözümleri sunuyoruz.</strong></p>
-              <p>Klima ve kombiden yerden ısıtmaya kadar önce mekânı ve ihtiyacınızı yerinde değerlendiriyoruz. Ücretsiz keşif sonrası bütçenize uygun marka, montaj ve ödeme seçeneklerini birlikte netleştiriyoruz.</p>
+              <p className="home-kicker">{about.eyebrow}</p>
+              <h2>{about.title}</h2>
+              <p><strong>{about.lead}</strong></p>
+              <p>{about.body}</p>
               <div className="home-about-actions">
                 <a className="button primary" href="#iletisim">Ücretsiz keşif iste <span aria-hidden="true">→</span></a>
                 <Link className="home-text-link" href="/kurumsal">Hakkımızda <span aria-hidden="true">→</span></Link>
               </div>
             </div>
             <figure className="home-about-photo">
-              <Image src="/assets/cl-hero.webp" alt="Duvar tipi klima üzerinde çalışan teknisyen" fill sizes="(max-width: 700px) 94vw, 540px" />
-              <figcaption><strong>20 yıl</strong><span>Ustalık tecrübesi</span></figcaption>
+              <Image src={about.image} alt={about.alt} fill sizes="(max-width: 700px) 94vw, 540px" />
+              <figcaption><strong>{about.badgeTitle}</strong><span>{about.badgeText}</span></figcaption>
             </figure>
           </div>
         </section>
 
-        <CardRail id="projelerimiz" title="Projelerimiz" intro="Isıtma, montaj ve tesisat çalışmalarımızdan sahada çekilen kareler."
-          action={<Link className="home-text-link" href="/galeri">Tüm proje fotoğraflarını gör <span aria-hidden="true">→</span></Link>}>
-          {featuredProjects.map(([file, title], index) => (
-            <li key={file} className="home-card">
-              <Link href={`/galeri#ornek-${index + 1}`} className="home-project-link">
-                <div className="home-card-photo">
-                  <Image src={projectImage(file)} alt={title} fill sizes={cardSizes} />
-                </div>
-                <div className="home-card-body">
-                  <h3>{title}</h3>
-                  <span className="home-text-link">İncele <span aria-hidden="true">→</span></span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </CardRail>
+        <Suspense fallback={<div className="container"><Link href="/galeri">Tüm proje fotoğraflarını gör</Link></div>}>
+          <HomeProjects />
+        </Suspense>
 
         <Suspense fallback={<div className="container"><Link href="/urunler">Ürün kataloğunu aç</Link></div>}>
           <HomeProducts />

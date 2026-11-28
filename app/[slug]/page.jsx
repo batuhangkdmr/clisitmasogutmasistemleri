@@ -1,12 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import Breadcrumb from "../components/Breadcrumb";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import { featuredProjects, projectImage } from "../lib/home-projects";
-import { mediaUrl } from "../lib/cloudinary-loader";
-import { mediaFiles } from "../lib/media-files";
 import { pageMetadata } from "../lib/seo";
 import { site } from "../lib/site";
 import { servicePath, services } from "../lib/services";
@@ -19,14 +15,6 @@ const pages = {
     description: "Samsun ve Tekkeköy’de klima, ısı pompası, doğalgaz, kombi, yerden ısıtma ve tesisat çözümlerini inceleyin.",
     lead: "Tekkeköy ve çevresinde klima, doğalgaz, tesisat ve petek temizliği. Yerinde bakıp net fiyat veriyoruz.",
     cards: services,
-  },
-  galeri: {
-    eyebrow: "UYGULAMALAR",
-    title: "Projelerimiz",
-    seoTitle: "Samsun Isıtma ve Tesisat Projeleri",
-    description: "CL Isıtma’nın Samsun ve çevresindeki ısıtma, montaj ve tesisat uygulamalarından saha fotoğraflarını inceleyin.",
-    lead: "Saha uygulamalarımızdan ısıtma, montaj ve tesisat fotoğrafları.",
-    gallery: true,
   },
   tesekkurler: {
     eyebrow: "İLETİŞİM",
@@ -180,14 +168,6 @@ export default async function Page({ params }) {
   if (!Object.hasOwn(pages, slug)) notFound();
   const page = pages[slug];
 
-  const galleryFiles = page.gallery
-    ? (await mediaFiles("galeri")).filter((file) => file !== "firmayeri.jpg" && /\.(jpe?g|png|webp)$/i.test(file))
-    : [];
-  const featuredFiles = new Set(featuredProjects.map(([file]) => file));
-  const galleryPhotos = page.gallery
-    ? [...featuredProjects, ...galleryFiles.filter((file) => !featuredFiles.has(file)).map((file) => [file, "Saha uygulaması"])]
-    : [];
-
   return (
     <>
       <SiteHeader />
@@ -207,28 +187,6 @@ export default async function Page({ params }) {
                 </article>
               ))}
             </div>
-          ) : null}
-
-          {page.gallery ? (
-            <>
-              <div className="project-gallery">
-                {galleryPhotos.map(([file, title], index) => (
-                  <figure key={file} id={`ornek-${index + 1}`}>
-                    <a href={mediaUrl(projectImage(file), { width: 1800 })} aria-label={`${title} fotoğrafını aç (${index + 1})`}>
-                      <Image src={projectImage(file)} alt={title} fill sizes="(max-width: 700px) 46vw, (max-width: 1200px) 23vw, 275px" />
-                    </a>
-                    <figcaption>{title}</figcaption>
-                  </figure>
-                ))}
-              </div>
-              <p className="gallery-note">
-                Daha fazla fotoğraf için{" "}
-                <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-                  Instagram
-                </a>
-                ’a bakabilirsiniz.
-              </p>
-            </>
           ) : null}
 
           {page.sections
