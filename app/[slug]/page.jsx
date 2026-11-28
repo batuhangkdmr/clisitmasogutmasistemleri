@@ -156,33 +156,6 @@ const pages = {
       },
     ],
   },
-  blog: {
-    eyebrow: "BLOG",
-    title: "Saha notları ve kullanım ipuçları",
-    lead: "Klima, kombi ve petek temizliği hakkında kısa yazılar. Satış vaadi değil; pratik bilgi.",
-    blogPosts: [
-      {
-        date: "Mart 2026",
-        title: "Petekler eşit ısınmıyorsa ne bakılır?",
-        summary: "Alt kat soğuk, üst kat fazla sıcaksa önce denge ve tıkanıklığa bakıyoruz. Temizlik gerekip gerekmediğini yerinde anlıyoruz.",
-      },
-      {
-        date: "Şubat 2026",
-        title: "Klima kapasitesi nasıl seçilir?",
-        summary: "Sadece metrekare yetmez. Oda yönü, yalıtım ve kullanım şekli kapasiteyi değiştirir. Keşifte bunları ölçüyoruz.",
-      },
-      {
-        date: "Ocak 2026",
-        title: "Kombi değişiminde nelere dikkat edilir?",
-        summary: "Yoğuşmalı geçiş, baca ve petek uyumu önemli. Eski tesisata göre modeli netleştiriyoruz.",
-      },
-      {
-        date: "Aralık 2025",
-        title: "Kış öncesi kısa kontrol listesi",
-        summary: "Basınç, filtre ve petek ısısı. Küçük kontroller büyük arızaları azaltır.",
-      },
-    ],
-  },
 };
 
 export function generateStaticParams() {
@@ -271,18 +244,6 @@ export default async function Page({ params }) {
                 </section>
               ))
             : null}
-
-          {page.blogPosts ? (
-            <div className="blog-grid">
-              {page.blogPosts.map((post) => (
-                <article className="blog-card" key={post.title}>
-                  <span>{post.date}</span>
-                  <strong>{post.title}</strong>
-                  <p>{post.summary}</p>
-                </article>
-              ))}
-            </div>
-          ) : null}
 
           {page.thanks ? (
             <div className="utility-actions page-thanks-actions">

@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 
-export default function HomeScrollReveal() {
+export function useHomeScrollReveal(railRef) {
   useEffect(() => {
     if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rail = railRef?.current;
+    if (railRef && !rail) return;
 
     const observer = new window.IntersectionObserver((entries) => {
       for (const { isIntersecting, target } of entries) {
@@ -16,7 +18,8 @@ export default function HomeScrollReveal() {
 
     const observed = new WeakSet();
     function watchSections() {
-      for (const section of document.querySelectorAll("[data-home-reveal]")) {
+      const sections = rail ? [rail] : document.querySelectorAll('[data-home-reveal="pending"]');
+      for (const section of sections) {
         for (const child of section.children) {
           const elements = child.matches(".home-rail, .home-solutions-grid, .home-process-steps")
             ? child.children : [child];
@@ -29,13 +32,17 @@ export default function HomeScrollReveal() {
       }
     }
     watchSections();
-    const updates = new window.MutationObserver(watchSections);
-    updates.observe(document.querySelector("main"), { childList: true, subtree: true });
+    // Streamed rails must register only after their own hydration.
+    const updates = rail ? new window.MutationObserver(watchSections) : null;
+    updates?.observe(rail, { childList: true, subtree: true });
     return () => {
-      updates.disconnect();
+      updates?.disconnect();
       observer.disconnect();
     };
-  }, []);
+  }, [railRef]);
+}
 
+export default function HomeScrollReveal() {
+  useHomeScrollReveal();
   return null;
 }

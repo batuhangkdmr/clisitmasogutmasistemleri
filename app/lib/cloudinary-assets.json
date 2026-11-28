@@ -125,6 +125,13 @@
     "digest": "ceea61a61a04b4c06454c68c64c52a64b94cb58ad9071d9af0f00f65962e8ac6",
     "account": "jppwd0ec"
   },
+  "/assets/instagram-logo.png": {
+    "id": "cl-isitma/site/instagram-logo-00b17640a68bbe84",
+    "version": 1795824232,
+    "width": 272,
+    "digest": "00b17640a68bbe849c747f1cb6f8c8203e6ae1a813916dd96a21b454da31e1ed",
+    "account": "jppwd0ec"
+  },
   "/assets/kombi-ornek.webp": {
     "id": "cl-isitma/site/kombi-ornek-2bdfc2263c2c18a5",
     "version": 1795734689,

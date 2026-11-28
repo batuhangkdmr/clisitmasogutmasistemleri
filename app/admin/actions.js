@@ -13,6 +13,9 @@ import { catalogImagePublicId, destroyCatalogImage, uploadCatalogImage } from ".
 import { normalizeProductText } from "../lib/catalog";
 import { productTitle } from "../lib/catalog-seo";
 import { partnerBrands } from "../lib/partner-brands";
+import { blogPosts, orderedBlogPosts } from "../lib/blog";
+import { serviceSummaryLimit } from "../lib/blog-content";
+import { services } from "../lib/services";
 
 class InputError extends Error {}
 
@@ -76,6 +79,7 @@ function catalogMediaIds(catalog) {
   const urls = [
     ...catalog.products.flatMap(({ images }) => (images ?? []).map(({ url }) => url)),
     ...partnerBrands(catalog).map(({ image }) => image?.url),
+    ...blogPosts(catalog).map(({ cover }) => cover?.src),
   ];
   return new Set(urls.map(catalogImagePublicId).filter(Boolean));
 }
@@ -96,7 +100,7 @@ async function cleanPendingMedia() {
 const mediaPendingMessage = "Değişiklik kaydedildi. Cloudinary temizliği sırada. Panelden tekrar deneyebilirsiniz.";
 
 async function mutate(view, id, change, afterId = id, returnResult = false) {
-  const trackMedia = view === "urunler" || view === "markalar";
+  const trackMedia = view === "urunler" || view === "markalar" || view === "blog";
   let pending = 0;
   try {
     await changeCatalog((catalog) => {
@@ -115,6 +119,7 @@ async function mutate(view, id, change, afterId = id, returnResult = false) {
   if (pending) pending = await cleanPendingMedia().catch(() => pending);
   revalidatePath("/admin");
   revalidatePath("/urunler", "layout");
+  if (view === "blog") revalidatePath("/blog", "layout");
   revalidatePath("/");
   revalidatePath("/sitemap.xml");
   const next = editorUrl(view, afterId, pending ? mediaPendingMessage : "saved");
@@ -124,7 +129,8 @@ async function mutate(view, id, change, afterId = id, returnResult = false) {
 
 export async function retryCatalogMediaCleanup(form) {
   await adminOnly();
-  const view = form.get("view") === "markalar" ? "markalar" : "urunler";
+  const requested = form.get("view");
+  const view = ["blog", "markalar"].includes(requested) ? requested : "urunler";
   const remaining = await cleanPendingMedia().catch(() => 1);
   revalidatePath("/admin");
   redirect(editorUrl(view, "", remaining ? "Cloudinary temizliği henüz tamamlanmadı." : "Cloudinary temizliği tamamlandı."));
@@ -143,6 +149,86 @@ async function selectedImage(file, alt, options) {
   } catch (error) {
     throw new InputError(error instanceof TypeError ? "Görsel yüklenemedi. Tekrar deneyin." : error.message);
   }
+}
+
+export async function saveBlogPost(form, keepValuesOnError = false) {
+  await adminOnly();
+  const id = String(form.get("id") ?? "");
+  const postId = id || randomUUID();
+  let fields, image, alt;
+  try {
+    fields = {
+      title: value(form, "title", 120, true),
+      summary: value(form, "summary", 160, true),
+      body: value(form, "body", 30000, true),
+      status: value(form, "status", 10, true),
+      serviceSlug: value(form, "serviceSlug", 80),
+    };
+    if (!["draft", "published"].includes(fields.status)) throw new InputError("Geçerli bir yayın durumu seçin.");
+    const service = services.find(({ slug }) => slug === fields.serviceSlug);
+    if (fields.serviceSlug && !service) throw new InputError("Geçerli bir hizmet seçin.");
+    const serviceSummary = value(form, "serviceSummary", serviceSummaryLimit);
+    fields.serviceSummary = service && serviceSummary !== service.summary ? serviceSummary : "";
+    if (!id) slugify(fields.title);
+    alt = value(form, "imageAlt", 160);
+    const file = form.get("image");
+    if (file?.size && !alt) throw new InputError("Kapak görselinin ne gösterdiğini açıklayan bir alt metin yazın.");
+    image = await selectedImage(file, alt);
+  } catch (error) {
+    return writeError(error, "blog", id, keepValuesOnError);
+  }
+
+  return mutate("blog", id, (catalog) => {
+    const posts = blogPosts(catalog);
+    const old = id ? find(posts, id) : null;
+    const base = old?.slug ?? slugify(fields.title);
+    let slug = base;
+    if (!old) {
+      const used = new Set(posts.map((post) => post.slug));
+      for (let index = 2; used.has(slug); index++) {
+        const suffix = `-${index}`;
+        slug = base.slice(0, 120 - suffix.length).replace(/-$/, "") + suffix;
+      }
+    }
+    const now = new Date().toISOString();
+    const cover = image ? { src: image.url, alt } : form.get("removeCover") === "on" ? null :
+      old?.cover ? { ...old.cover, alt: alt || old.cover.alt } : null;
+    const post = {
+      ...old, ...fields, id: postId, slug, cover, updatedAt: now,
+      publishedAt: old?.publishedAt ?? (fields.status === "published" && !old?.dateLabel ? now : null),
+    };
+    catalog.blogPosts = old ? posts.map((entry) => entry.id === id ? post : entry) : [...posts, post];
+  }, "", keepValuesOnError);
+}
+
+export async function deleteBlogPost(form) {
+  await adminOnly();
+  const id = String(form.get("id") ?? "");
+  await mutate("blog", id, (catalog) => {
+    if (form.get("confirmation") !== "delete") throw new InputError("Yazıyı silmek için işlemi onaylayın.");
+    const posts = blogPosts(catalog);
+    find(posts, id);
+    catalog.blogPosts = posts.filter((post) => post.id !== id);
+    if (catalog.blogOrder) catalog.blogOrder = catalog.blogOrder.filter((postId) => postId !== id);
+  }, "");
+}
+
+export async function moveBlogPost(form) {
+  await adminOnly();
+  const id = String(form.get("id") ?? "");
+  const selectedId = String(form.get("selectedId") ?? "");
+  const direction = form.get("direction");
+  await mutate("blog", selectedId, (catalog) => {
+    if (!["top", "up", "down"].includes(direction)) throw new InputError("Geçerli bir sıralama işlemi seçin.");
+    const order = orderedBlogPosts(catalog).map((post) => post.id);
+    const from = order.indexOf(id);
+    if (from === -1) throw new InputError("Yazı bulunamadı. Listeyi yenileyin.");
+    const to = direction === "top" ? 0 : from + (direction === "up" ? -1 : 1);
+    if (to < 0 || to >= order.length || from === to) return;
+    order.splice(from, 1);
+    order.splice(to, 0, id);
+    catalog.blogOrder = order;
+  });
 }
 
 export async function login(form) {
